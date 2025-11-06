@@ -17,7 +17,7 @@ export function Footer() {
 
   return (
     <footer className="bg-gray-50 border-t border-gray-200">
-      <div className="container-content py-12">
+      <div className="container-content py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">

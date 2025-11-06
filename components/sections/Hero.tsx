@@ -15,14 +15,11 @@ export function Hero() {
         </p>
         
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <a
-            href="https://apps.apple.com/app/schedulr"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white hover:shadow-lg hover:scale-105 transition-all duration-200"
+          <div
+            className="inline-flex items-center justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white opacity-75 cursor-not-allowed"
           >
-            Download on the App Store
-          </a>
+            Coming Soon
+          </div>
           <Link
             href="#features"
             className="inline-flex items-center justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] text-[#FA4A8C] hover:text-[#945AE0] hover:underline underline-offset-4 transition-colors"

@@ -47,15 +47,9 @@ export function Navbar() {
             <Button
               variant="primary"
               size="md"
-              asChild
+              disabled
             >
-              <a
-                href="https://apps.apple.com/app/schedulr"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Download
-              </a>
+              Coming Soon
             </Button>
           </div>
 
@@ -86,16 +80,10 @@ export function Navbar() {
               variant="primary"
               size="md"
               className="w-full"
-              asChild
+              disabled
+              onClick={() => setMobileMenuOpen(false)}
             >
-              <a
-                href="https://apps.apple.com/app/schedulr"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                Download
-              </a>
+              Coming Soon
             </Button>
           </div>
         )}

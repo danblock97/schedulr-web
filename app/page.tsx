@@ -1,29 +1,10 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { Hero } from '@/components/sections/Hero';
-import { Features } from '@/components/sections/Features';
+import { AnimatedHero } from '@/components/sections/AnimatedHero';
+import { AnimatedFeatures } from '@/components/sections/AnimatedFeatures';
+import { AnimatedHowItWorks } from '@/components/sections/AnimatedHowItWorks';
+import { AnimatedCTA } from '@/components/sections/AnimatedCTA';
 import { FAQ } from '@/components/sections/FAQ';
-import { Button } from '@/components/ui/Button';
-import { Users, CalendarSync, Sparkles } from 'lucide-react';
-import Link from 'next/link';
-
-const howItWorksSteps = [
-  {
-    icon: Users,
-    title: 'Create or join a group',
-    description: 'Set up a scheduling circle with your friends, family, or team members. Share an invite code to invite others.',
-  },
-  {
-    icon: CalendarSync,
-    title: 'Sync your calendar',
-    description: 'Connect your device calendar for automatic availability. Your calendar data stays on your device—we never store it.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Ask Scheduly to find free time',
-    description: 'Use natural language to find the perfect meeting time. "When can me, Sarah, and Tom meet for 2 hours next week?"',
-  },
-];
 
 const homeFAQ = [
   {
@@ -46,58 +27,23 @@ const homeFAQ = [
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
       <Navbar />
       <main>
-        <Hero />
-        <Features />
-        
-        {/* How It Works Section */}
-        <section className="py-20 bg-gray-50">
-          <div className="container-content">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-                How It Works
-              </h2>
-              <p className="text-xl text-gray-800">
-                Get started in three simple steps
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {howItWorksSteps.map((step, index) => {
-                const Icon = step.icon;
-                return (
-                  <div key={index} className="text-center">
-                    <div className="flex justify-center mb-6">
-                      <div className="relative">
-                        <div className="absolute inset-0 bg-gradient-to-r from-[#FA4A8C] to-[#945AE0] rounded-full blur-xl opacity-30"></div>
-                        <div className="relative p-6 rounded-full gradient-brand">
-                          <Icon className="w-8 h-8 text-white" />
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mb-2">
-                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#FA4A8C] text-white text-sm font-semibold">
-                        {index + 1}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-semibold mb-3 text-gray-900">{step.title}</h3>
-                    <p className="text-gray-700">{step.description}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
+        <AnimatedHero />
+        <AnimatedFeatures />
+        <AnimatedHowItWorks />
         
         {/* Testimonials Placeholder */}
-        <section className="py-20 bg-white">
-          <div className="container-content text-center">
+        <section className="py-20 bg-white relative overflow-hidden">
+          <div className="absolute inset-0 opacity-5">
+            <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-[#945AE0] rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
+          </div>
+          <div className="container-content text-center relative z-10">
             <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
               Loved by teams everywhere
             </h2>
-            <p className="text-xl text-gray-800 max-w-2xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Testimonials coming soon. Join thousands of users who have simplified their group scheduling!
             </p>
           </div>
@@ -107,24 +53,7 @@ export default function Home() {
         <FAQ items={homeFAQ} />
         
         {/* Final CTA */}
-        <section className="py-20 bg-gray-50">
-          <div className="container-content text-center">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
-              Ready to simplify your scheduling?
-            </h2>
-            <p className="text-xl text-gray-800 mb-8 max-w-2xl mx-auto">
-              Download Schedulr today and experience the easiest way to coordinate group schedules.
-            </p>
-            <a
-              href="https://apps.apple.com/app/schedulr"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white hover:shadow-lg hover:scale-105 transition-all duration-200"
-            >
-              Download on the App Store
-            </a>
-          </div>
-        </section>
+        <AnimatedCTA />
       </main>
       <Footer />
     </div>
