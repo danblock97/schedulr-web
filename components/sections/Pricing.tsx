@@ -73,16 +73,16 @@ export function Pricing() {
               </h3>
               <p className="text-gray-800 mb-4">Perfect for larger friend groups</p>
               <div className="mb-2">
-                <span className="text-3xl font-bold">£4.99</span>
+                <span className="text-3xl font-bold">£3.99</span>
                 <span className="text-gray-800">/month</span>
               </div>
               <p className="text-sm text-gray-800 mb-2">or</p>
               <div className="mb-2">
-                <span className="text-3xl font-bold">£44.99</span>
+                <span className="text-3xl font-bold">£34.99</span>
                 <span className="text-gray-800">/year</span>
               </div>
               <p className="text-sm text-[#33C756] font-semibold">
-                💰 Save £15 with yearly plan
+                💰 Save £13 with yearly plan
               </p>
             </div>
             
