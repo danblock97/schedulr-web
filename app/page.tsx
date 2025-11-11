@@ -3,6 +3,7 @@ import { Footer } from '@/components/layout/Footer';
 import { AnimatedHero } from '@/components/sections/AnimatedHero';
 import { AnimatedFeatures } from '@/components/sections/AnimatedFeatures';
 import { AnimatedHowItWorks } from '@/components/sections/AnimatedHowItWorks';
+import { AppShowcase } from '@/components/sections/AppShowcase';
 import { AnimatedCTA } from '@/components/sections/AnimatedCTA';
 import { FAQ } from '@/components/sections/FAQ';
 
@@ -33,23 +34,7 @@ export default function Home() {
         <AnimatedHero />
         <AnimatedFeatures />
         <AnimatedHowItWorks />
-        
-        {/* Testimonials Placeholder */}
-        <section className="py-20 bg-white relative overflow-hidden">
-          <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-1/2 left-1/2 w-96 h-96 bg-[#945AE0] rounded-full blur-3xl transform -translate-x-1/2 -translate-y-1/2" />
-          </div>
-          <div className="container-content text-center relative z-10">
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
-              Loved by teams everywhere
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Testimonials coming soon. Join thousands of users who have simplified their group scheduling!
-            </p>
-          </div>
-        </section>
-        
-        {/* FAQ Section */}
+        <AppShowcase />
         <FAQ items={homeFAQ} />
         
         {/* Final CTA */}

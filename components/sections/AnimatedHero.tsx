@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { OrbitalBackground } from '@/components/ui/OrbitalBackground';
 import { AnimatedGradient } from '@/components/ui/AnimatedGradient';
 import { ArrowRight, Sparkles } from 'lucide-react';
@@ -119,6 +120,101 @@ export function AnimatedHero() {
             }}
           />
         ))}
+      </div>
+
+      {/* Floating iPhone Mockups */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
+        {/* Left iPhone */}
+        <motion.div
+          initial={{ opacity: 0, x: -100, rotate: -15 }}
+          animate={{ 
+            opacity: [0.3, 0.5, 0.3],
+            x: [0, -20, 0],
+            y: [0, 30, 0],
+            rotate: [-15, -12, -15],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 0.5,
+          }}
+          className="absolute left-[5%] top-1/2 -translate-y-1/2 w-[200px] h-[400px]"
+        >
+          <div className="relative w-full h-full bg-black rounded-[2.5rem] p-2 shadow-2xl">
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-5 bg-black rounded-b-xl z-20" />
+            <div className="relative w-full h-full bg-white rounded-[2rem] overflow-hidden">
+              <Image
+                src="/images/app-screenshots/iphone-dashboard.png"
+                alt="Schedulr Dashboard"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Right iPhone */}
+        <motion.div
+          initial={{ opacity: 0, x: 100, rotate: 15 }}
+          animate={{ 
+            opacity: [0.3, 0.5, 0.3],
+            x: [0, 20, 0],
+            y: [0, -30, 0],
+            rotate: [15, 12, 15],
+          }}
+          transition={{
+            duration: 6,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 1,
+          }}
+          className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[200px] h-[400px]"
+        >
+          <div className="relative w-full h-full bg-black rounded-[2.5rem] p-2 shadow-2xl">
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-5 bg-black rounded-b-xl z-20" />
+            <div className="relative w-full h-full bg-white rounded-[2rem] overflow-hidden">
+              <Image
+                src="/images/app-screenshots/iphone-calendar-view.png"
+                alt="Calendar View"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Center iPhone (smaller, behind text) */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ 
+            opacity: [0.2, 0.3, 0.2],
+            scale: [0.8, 0.85, 0.8],
+            y: [0, -20, 0],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: 'easeInOut',
+            delay: 0.8,
+          }}
+          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-[360px] -z-10"
+        >
+          <div className="relative w-full h-full bg-black rounded-[2.5rem] p-2 shadow-2xl blur-sm">
+            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-5 bg-black rounded-b-xl z-20" />
+            <div className="relative w-full h-full bg-white rounded-[2rem] overflow-hidden">
+              <Image
+                src="/images/app-screenshots/iphone-scheduly-ai.png"
+                alt="Scheduly AI"
+                fill
+                className="object-cover"
+                priority
+              />
+            </div>
+          </div>
+        </motion.div>
       </div>
 
       <div className="container-content relative z-10 text-center py-20">
