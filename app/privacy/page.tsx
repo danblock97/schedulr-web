@@ -46,6 +46,20 @@ export default function PrivacyPage() {
                 <strong>Important:</strong> We do NOT collect or store your calendar data. Calendar access is read-only and all calendar data remains on your device.
               </p>
 
+              <h2 className="text-2xl font-bold mt-8 mb-4">2.1. Cookies and Tracking</h2>
+              <p className="text-gray-700 mb-4">
+                <strong>We do not use cookies or tracking technologies.</strong> Schedulr is a privacy-first application that does not set, store, or use cookies for any purpose, including:
+              </p>
+              <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-2">
+                <li>User tracking or analytics</li>
+                <li>Session management (we use secure token-based authentication)</li>
+                <li>Advertising or marketing purposes</li>
+                <li>Third-party tracking services</li>
+              </ul>
+              <p className="text-gray-700 mb-6">
+                Our web presence (marketing website) is a static informational site that does not set cookies. If you access our website through a mobile app WebView, no cookies will be set or collected.
+              </p>
+
               <h2 className="text-2xl font-bold mt-8 mb-4">3. How Data is Used</h2>
               <p className="text-gray-700 mb-4">We use your data to:</p>
               <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-2">
