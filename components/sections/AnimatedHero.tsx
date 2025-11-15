@@ -6,7 +6,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { OrbitalBackground } from '@/components/ui/OrbitalBackground';
 import { AnimatedGradient } from '@/components/ui/AnimatedGradient';
-import { ArrowRight, Sparkles } from 'lucide-react';
+import { ArrowRight, Sparkles, Smartphone } from 'lucide-react';
+import { useDeviceDetection } from '@/lib/useDeviceDetection';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -54,8 +55,11 @@ interface Particle {
   delay: number;
 }
 
+const APP_STORE_URL = 'https://apps.apple.com/gb/app/schedulr/id6754965988';
+
 export function AnimatedHero() {
   const [particles, setParticles] = useState<Particle[]>([]);
+  const deviceInfo = useDeviceDetection();
 
   useEffect(() => {
     // Generate particles only on client side to avoid hydration mismatch
@@ -230,7 +234,7 @@ export function AnimatedHero() {
           >
             <Sparkles className="w-4 h-4 text-[#FA4A8C]" />
             <span className="text-sm font-medium text-gray-700">
-              Coming Soon to the App Store
+              {deviceInfo.isIOS ? 'Available Now' : 'Available on iOS'}
             </span>
           </motion.div>
 
@@ -270,13 +274,29 @@ export function AnimatedHero() {
             variants={itemVariants}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white shadow-lg shadow-[#FA4A8C]/30 opacity-75 cursor-not-allowed"
-            >
-              Coming Soon
-            </motion.div>
+            {deviceInfo.canOpenAppStore ? (
+              <motion.a
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white shadow-lg shadow-[#FA4A8C]/30 hover:shadow-xl hover:shadow-[#FA4A8C]/40 transition-all duration-300"
+              >
+                <Smartphone className="w-5 h-5" />
+                Download on the App Store
+              </motion.a>
+            ) : (
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="inline-flex flex-col items-center justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white shadow-lg shadow-[#FA4A8C]/30 opacity-90"
+                title="Schedulr is available for iPhone and iPad. Open this page on your iOS device to download."
+              >
+                <span>iOS Only</span>
+                <span className="text-sm font-normal opacity-90">Open on iPhone/iPad</span>
+              </motion.div>
+            )}
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

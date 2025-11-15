@@ -2,12 +2,16 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Smartphone } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
+import { useDeviceDetection } from '@/lib/useDeviceDetection';
+
+const APP_STORE_URL = 'https://apps.apple.com/gb/app/schedulr/id6754965988';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const deviceInfo = useDeviceDetection();
 
   const navLinks = [
     { href: '/', label: 'Home' },
@@ -44,13 +48,26 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button
-              variant="primary"
-              size="md"
-              disabled
-            >
-              Coming Soon
-            </Button>
+            {deviceInfo.canOpenAppStore ? (
+              <a
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold gradient-brand text-white shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                <Smartphone className="w-4 h-4" />
+                Download
+              </a>
+            ) : (
+              <Button
+                variant="primary"
+                size="md"
+                disabled
+                title="Schedulr is available for iPhone and iPad. Open this page on your iOS device to download."
+              >
+                iOS Only
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -76,15 +93,29 @@ export function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Button
-              variant="primary"
-              size="md"
-              className="w-full"
-              disabled
-              onClick={() => setMobileMenuOpen(false)}
-            >
-              Coming Soon
-            </Button>
+            {deviceInfo.canOpenAppStore ? (
+              <a
+                href={APP_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setMobileMenuOpen(false)}
+                className="inline-flex items-center justify-center gap-2 w-full px-4 py-2 rounded-full text-sm font-semibold gradient-brand text-white shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                <Smartphone className="w-4 h-4" />
+                Download on App Store
+              </a>
+            ) : (
+              <Button
+                variant="primary"
+                size="md"
+                className="w-full"
+                disabled
+                onClick={() => setMobileMenuOpen(false)}
+                title="Schedulr is available for iPhone and iPad. Open this page on your iOS device to download."
+              >
+                iOS Only
+              </Button>
+            )}
           </div>
         )}
       </div>
