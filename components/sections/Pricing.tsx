@@ -23,85 +23,89 @@ export function Pricing() {
     <section className="py-20 bg-gray-50">
       <div className="container-content">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 font-heading">
             Simple, transparent pricing
           </h2>
-          <p className="text-xl text-gray-800">
+          <p className="text-xl text-gray-600">
             Choose the plan that works for you
           </p>
         </div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Free Tier */}
-          <Card className="flex flex-col">
+          <div className="bento-card p-8 flex flex-col">
             <div className="mb-6">
-              <h3 className="text-2xl font-bold mb-2 text-gray-900">Free Forever</h3>
-              <p className="text-gray-800 mb-4">Perfect for trying out Schedulr</p>
+              <h3 className="text-2xl font-bold mb-2 text-gray-900 font-heading">Free Forever</h3>
+              <p className="text-gray-500 mb-4">Perfect for trying out Schedulr</p>
             </div>
-            
-            <div className="flex-1 space-y-3 mb-8">
+
+            <div className="flex-1 space-y-4 mb-8">
               {freeFeatures.map((feature, index) => (
                 <div key={index} className="flex items-center space-x-3">
                   {feature.included ? (
-                    <Check className="w-5 h-5 text-[#33C756] flex-shrink-0" />
+                    <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
+                      <Check className="w-3 h-3 text-green-600" />
+                    </div>
                   ) : (
-                    <X className="w-5 h-5 text-gray-300 flex-shrink-0" />
+                    <div className="w-5 h-5 rounded-full bg-gray-100 flex items-center justify-center flex-shrink-0">
+                      <X className="w-3 h-3 text-gray-400" />
+                    </div>
                   )}
-                  <span className={feature.included ? 'text-gray-900' : 'text-gray-400'}>
+                  <span className={feature.included ? 'text-gray-900 font-medium' : 'text-gray-400'}>
                     {feature.text}
                   </span>
                 </div>
               ))}
             </div>
-            
-            <Button variant="secondary" size="lg" className="w-full" disabled>
-              Current Plan
-            </Button>
-          </Card>
-          
+
+            <div className="mt-auto pt-6 border-t border-gray-100 text-center text-sm text-gray-500">
+              Available to everyone
+            </div>
+          </div>
+
           {/* Pro Tier */}
-          <Card className="flex flex-col relative border-2 border-[#FA4A8C]">
+          <div className="bento-card p-8 flex flex-col relative border-2 border-indigo-500 shadow-xl shadow-indigo-100">
             <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-              <span className="bg-gradient-to-r from-[#FA4A8C] to-[#945AE0] text-white px-4 py-1 rounded-full text-sm font-semibold">
+              <span className="bg-indigo-600 text-white px-4 py-1 rounded-full text-sm font-bold shadow-lg">
                 Most Popular
               </span>
             </div>
-            
+
             <div className="mb-6 mt-4">
-              <h3 className="text-2xl font-bold mb-2 text-gray-900">
-                Pro <span className="text-[#FA4A8C]">✨</span>
+              <h3 className="text-2xl font-bold mb-2 text-gray-900 font-heading">
+                Pro <span className="text-indigo-500">✨</span>
               </h3>
-              <p className="text-gray-800 mb-4">Perfect for larger friend groups</p>
-              <div className="mb-2">
-                <span className="text-3xl font-bold">£3.99</span>
-                <span className="text-gray-800">/month</span>
+              <p className="text-gray-500 mb-4">Perfect for larger friend groups</p>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-4xl font-bold text-gray-900">£3.99</span>
+                <span className="text-gray-500">/month</span>
               </div>
-              <p className="text-sm text-gray-800 mb-2">or</p>
-              <div className="mb-2">
-                <span className="text-3xl font-bold">£34.99</span>
-                <span className="text-gray-800">/year</span>
-              </div>
-              <p className="text-sm text-[#33C756] font-semibold">
+              <div className="text-sm text-gray-500 mb-2">or £34.99/year</div>
+              <p className="text-sm text-green-600 font-bold bg-green-50 inline-block px-2 py-1 rounded-lg">
                 💰 Save £13 with yearly plan
               </p>
             </div>
-            
-            <div className="flex-1 space-y-3 mb-8">
+
+            <div className="flex-1 space-y-4 mb-8">
               {proFeatures.map((feature, index) => (
                 <div key={index} className="flex items-center space-x-3">
-                  <Check className="w-5 h-5 text-[#33C756] flex-shrink-0" />
-                  <span className="text-gray-900">{feature.text}</span>
+                  <div className="w-5 h-5 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+                    <Check className="w-3 h-3 text-indigo-600" />
+                  </div>
+                  <span className="text-gray-900 font-medium">{feature.text}</span>
                 </div>
               ))}
             </div>
-            
-            <Button variant="primary" size="lg" className="w-full" disabled>
-              Subscribe to Pro
-            </Button>
-            <p className="text-xs text-gray-500 text-center mt-2">
-              Subscriptions managed in-app via App Store
-            </p>
-          </Card>
+
+            <div className="mt-auto pt-6 border-t border-gray-100 text-center">
+              <p className="text-sm font-medium text-indigo-600">
+                Upgrade anytime in the app
+              </p>
+              <p className="text-xs text-gray-400 mt-1">
+                Subscriptions managed via App Store
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

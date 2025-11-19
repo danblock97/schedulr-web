@@ -27,7 +27,7 @@ export function FAQ({ items, title, description }: FAQProps) {
   });
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+    <section className="py-10 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#FA4A8C] rounded-full blur-3xl" />
@@ -51,7 +51,7 @@ export function FAQ({ items, title, description }: FAQProps) {
             )}
           </motion.div>
         )}
-        
+
         <motion.div
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}

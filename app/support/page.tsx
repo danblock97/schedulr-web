@@ -64,7 +64,7 @@ export default function SupportPage() {
       const startY = Math.random() * 100;
       const distance = 15 + Math.random() * 30;
       const angle = Math.random() * Math.PI * 2;
-      
+
       generatedParticles.push({
         startX,
         startY,
@@ -72,11 +72,11 @@ export default function SupportPage() {
         angle,
         width: 3 + Math.random() * 4,
         height: 3 + Math.random() * 4,
-        background: i % 3 === 0 
-          ? 'rgba(250, 74, 140, 0.2)' 
+        background: i % 3 === 0
+          ? 'rgba(79, 70, 229, 0.2)' // Indigo
           : i % 3 === 1
-          ? 'rgba(148, 90, 224, 0.2)'
-          : 'rgba(69, 161, 250, 0.15)',
+            ? 'rgba(255, 107, 107, 0.2)' // Coral
+            : 'rgba(6, 182, 212, 0.15)', // Cyan
         duration: 4 + Math.random() * 2,
         delay: Math.random() * 2,
       });
@@ -88,10 +88,10 @@ export default function SupportPage() {
     <div className="min-h-screen flex flex-col overflow-x-hidden">
       <Navbar />
       <main className="flex-1">
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white pt-20 pb-20">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-indigo-50/30 to-white pt-20 pb-20">
           <AnimatedGradient />
           <OrbitalBackground />
-          
+
           {/* Floating particles */}
           <div className="absolute inset-0 overflow-hidden pointer-events-none">
             {particles.map((particle, i) => (
@@ -133,7 +133,7 @@ export default function SupportPage() {
               {/* Icon */}
               <motion.div
                 variants={itemVariants}
-                className="inline-flex items-center justify-center w-20 h-20 rounded-full gradient-brand mb-6 shadow-lg shadow-[#FA4A8C]/30"
+                className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-indigo-600 mb-6 shadow-lg shadow-indigo-200"
               >
                 <motion.div
                   variants={floatingVariants}
@@ -146,7 +146,7 @@ export default function SupportPage() {
               {/* Heading */}
               <motion.h1
                 variants={itemVariants}
-                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 gradient-brand-text leading-tight"
+                className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-gray-900 font-heading leading-tight"
               >
                 We're here to help!
               </motion.h1>
@@ -154,7 +154,7 @@ export default function SupportPage() {
               {/* Description */}
               <motion.p
                 variants={itemVariants}
-                className="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto mb-12 leading-relaxed"
+                className="text-xl md:text-2xl text-gray-600 max-w-2xl mx-auto mb-12 leading-relaxed"
               >
                 Have a question? Drop us a line and we'll get back to you within 24 hours.
               </motion.p>
@@ -168,7 +168,7 @@ export default function SupportPage() {
                   href="mailto:support@schedulr.co.uk"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white shadow-lg shadow-[#FA4A8C]/30 hover:shadow-xl hover:shadow-[#FA4A8C]/40 transition-all duration-300"
+                  className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-bold min-h-[52px] bg-indigo-600 text-white shadow-lg shadow-indigo-200 hover:shadow-xl hover:shadow-indigo-300 transition-all duration-300"
                 >
                   <MessageCircle className="w-5 h-5" />
                   Email support@schedulr.co.uk
@@ -180,9 +180,9 @@ export default function SupportPage() {
                 variants={itemVariants}
                 className="flex items-center justify-center gap-4 mb-8"
               >
-                <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent w-32"></div>
-                <span className="text-sm text-gray-500 font-medium">or</span>
-                <div className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent w-32"></div>
+                <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent w-32"></div>
+                <span className="text-sm text-gray-400 font-medium">or</span>
+                <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent w-32"></div>
               </motion.div>
 
               {/* Form Links */}
@@ -196,11 +196,11 @@ export default function SupportPage() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] bg-gray-900 text-white hover:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-bold min-h-[52px] bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 shadow-sm hover:shadow-md transition-all duration-300"
                 >
-                  <Bug className="w-5 h-5" />
+                  <Bug className="w-5 h-5 text-coral-500" />
                   Report a Bug
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 text-gray-400" />
                 </motion.a>
                 <motion.a
                   href="https://danblock97.atlassian.net/jira/software/c/form/e56fc642-7e09-4a9a-99ae-2f622abd3808?atlOrigin=eyJpIjoiNjc2M2E3YmMxMGU4NDdiMzk3NjY2Mjc1ZTE2NjAzMDIiLCJwIjoiaiJ9"
@@ -208,11 +208,11 @@ export default function SupportPage() {
                   rel="noopener noreferrer"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] bg-gray-900 text-white hover:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-bold min-h-[52px] bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 shadow-sm hover:shadow-md transition-all duration-300"
                 >
-                  <Sparkles className="w-5 h-5" />
+                  <Sparkles className="w-5 h-5 text-indigo-500" />
                   Request a Feature
-                  <ArrowRight className="w-4 h-4" />
+                  <ArrowRight className="w-4 h-4 text-gray-400" />
                 </motion.a>
               </motion.div>
 
@@ -232,8 +232,8 @@ export default function SupportPage() {
                     transition={{ delay: 0.8 + index * 0.1 }}
                     className="px-6"
                   >
-                    <div className="text-2xl font-bold gradient-brand-text">{stat.value}</div>
-                    <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
+                    <div className="text-2xl font-bold text-indigo-600 font-heading">{stat.value}</div>
+                    <div className="text-sm text-gray-500 mt-1">{stat.label}</div>
                   </motion.div>
                 ))}
               </motion.div>

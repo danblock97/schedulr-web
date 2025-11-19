@@ -98,32 +98,33 @@ export function AppShowcase() {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
+    <section className="pt-20 pb-10 bg-gradient-to-b from-white via-gray-50 to-white relative overflow-hidden">
       {/* Animated background */}
+      {/* Animated background - Optimized */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(4)].map((_, i) => (
+        {[...Array(2)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full blur-3xl opacity-10"
             style={{
-              width: `${400 + i * 100}px`,
-              height: `${400 + i * 100}px`,
+              width: `${500 + i * 100}px`,
+              height: `${500 + i * 100}px`,
               background: i % 2 === 0
                 ? 'linear-gradient(135deg, #FA4A8C, #945AE0)'
                 : 'linear-gradient(135deg, #945AE0, #45A1FA)',
-              left: `${i * 25}%`,
-              top: `${i * 20}%`,
+              left: `${i * 40}%`,
+              top: `${i * 30}%`,
+              willChange: 'transform',
             }}
             animate={{
-              x: [0, 100, 0],
-              y: [0, 50, 0],
-              scale: [1, 1.2, 1],
+              x: [0, 50, 0],
+              y: [0, 30, 0],
+              scale: [1, 1.1, 1],
             }}
             transition={{
-              duration: 10 + i * 2,
+              duration: 15 + i * 5,
               repeat: Infinity,
               ease: 'easeInOut',
-              delay: i * 1.5,
             }}
           />
         ))}
@@ -191,12 +192,12 @@ export function AppShowcase() {
                   >
                     {/* Phone Shadow/Glow */}
                     <div className="absolute inset-0 bg-gradient-to-br from-[#FA4A8C]/20 to-[#945AE0]/20 rounded-[3rem] blur-2xl -z-10 scale-110" />
-                    
+
                     {/* Phone Frame */}
                     <div className="relative w-full h-full bg-black rounded-[3rem] p-2 shadow-2xl">
                       {/* Notch */}
                       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-black rounded-b-2xl z-20" />
-                      
+
                       {/* Screen */}
                       <div className="relative w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
                         <Image
@@ -259,11 +260,10 @@ export function AppShowcase() {
               whileTap={{ scale: 0.95 }}
             >
               <div
-                className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all ${
-                  index === currentIndex
-                    ? 'border-[#FA4A8C] shadow-lg shadow-[#FA4A8C]/30'
-                    : 'border-gray-200 hover:border-gray-300'
-                }`}
+                className={`relative w-16 h-16 md:w-20 md:h-20 rounded-xl overflow-hidden border-2 transition-all ${index === currentIndex
+                  ? 'border-[#FA4A8C] shadow-lg shadow-[#FA4A8C]/30'
+                  : 'border-gray-200 hover:border-gray-300'
+                  }`}
               >
                 <Image
                   src={screenshot.src}
@@ -297,9 +297,8 @@ export function AppShowcase() {
               whileTap={{ scale: 0.9 }}
             >
               <div
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  index === currentIndex ? 'bg-[#FA4A8C]' : 'bg-gray-300'
-                }`}
+                className={`w-2 h-2 rounded-full transition-colors ${index === currentIndex ? 'bg-[#FA4A8C]' : 'bg-gray-300'
+                  }`}
               />
               {index === currentIndex && (
                 <motion.div

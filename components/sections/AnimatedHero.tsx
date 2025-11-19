@@ -58,303 +58,136 @@ interface Particle {
 const APP_STORE_URL = 'https://apps.apple.com/gb/app/schedulr/id6754965988';
 
 export function AnimatedHero() {
-  const [particles, setParticles] = useState<Particle[]>([]);
   const deviceInfo = useDeviceDetection();
 
-  useEffect(() => {
-    // Generate particles only on client side to avoid hydration mismatch
-    // Reduced from 30 to 12 for better performance
-    const generatedParticles: Particle[] = [];
-    for (let i = 0; i < 12; i++) {
-      const startX = Math.random() * 100;
-      const startY = Math.random() * 100;
-      const distance = 20 + Math.random() * 40;
-      const angle = Math.random() * Math.PI * 2;
-      
-      generatedParticles.push({
-        startX,
-        startY,
-        distance,
-        angle,
-        width: 4 + Math.random() * 4,
-        height: 4 + Math.random() * 4,
-        background: i % 3 === 0 
-          ? 'rgba(250, 74, 140, 0.25)' 
-          : i % 3 === 1
-          ? 'rgba(148, 90, 224, 0.25)'
-          : 'rgba(69, 161, 250, 0.2)',
-        duration: 5 + Math.random() * 2,
-        delay: Math.random() * 2,
-      });
-    }
-    setParticles(generatedParticles);
-  }, []);
-
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-gray-50 to-white">
-      <AnimatedGradient />
-      <OrbitalBackground />
-      
-      {/* Floating particles - optimized for performance */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {particles.map((particle, i) => (
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-white pt-20">
+      <div className="container-content relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+          {/* Left Column: Content */}
           <motion.div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              left: `${particle.startX}%`,
-              top: `${particle.startY}%`,
-              width: `${particle.width}px`,
-              height: `${particle.height}px`,
-              background: particle.background,
-              willChange: 'transform, opacity',
-              filter: 'blur(2px)',
-            }}
-            animate={{
-              x: [0, Math.cos(particle.angle) * particle.distance, 0],
-              y: [0, Math.sin(particle.angle) * particle.distance, 0],
-              opacity: [0.15, 0.5, 0.15],
-              scale: [1, 1.2, 1],
-            }}
-            transition={{
-              duration: particle.duration,
-              repeat: Infinity,
-              delay: particle.delay,
-              ease: [0.4, 0, 0.6, 1] as [number, number, number, number],
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Floating iPhone Mockups */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none hidden lg:block">
-        {/* Left iPhone */}
-        <motion.div
-          initial={{ opacity: 0, x: -100, rotate: -15 }}
-          animate={{ 
-            opacity: [0.3, 0.5, 0.3],
-            x: [0, -20, 0],
-            y: [0, 30, 0],
-            rotate: [-15, -12, -15],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 0.5,
-          }}
-          className="absolute left-[5%] top-1/2 -translate-y-1/2 w-[200px] h-[400px]"
-        >
-          <div className="relative w-full h-full bg-black rounded-[2.5rem] p-2 shadow-2xl">
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-5 bg-black rounded-b-xl z-20" />
-            <div className="relative w-full h-full bg-white rounded-[2rem] overflow-hidden">
-              <Image
-                src="/images/app-screenshots/iphone-dashboard.png"
-                alt="Schedulr Dashboard"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Right iPhone */}
-        <motion.div
-          initial={{ opacity: 0, x: 100, rotate: 15 }}
-          animate={{ 
-            opacity: [0.3, 0.5, 0.3],
-            x: [0, 20, 0],
-            y: [0, -30, 0],
-            rotate: [15, 12, 15],
-          }}
-          transition={{
-            duration: 6,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 1,
-          }}
-          className="absolute right-[5%] top-1/2 -translate-y-1/2 w-[200px] h-[400px]"
-        >
-          <div className="relative w-full h-full bg-black rounded-[2.5rem] p-2 shadow-2xl">
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-5 bg-black rounded-b-xl z-20" />
-            <div className="relative w-full h-full bg-white rounded-[2rem] overflow-hidden">
-              <Image
-                src="/images/app-screenshots/iphone-calendar-view.png"
-                alt="Calendar View"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Center iPhone (smaller, behind text) */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ 
-            opacity: [0.2, 0.3, 0.2],
-            scale: [0.8, 0.85, 0.8],
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 0.8,
-          }}
-          className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[180px] h-[360px] -z-10"
-        >
-          <div className="relative w-full h-full bg-black rounded-[2.5rem] p-2 shadow-2xl blur-sm">
-            <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-24 h-5 bg-black rounded-b-xl z-20" />
-            <div className="relative w-full h-full bg-white rounded-[2rem] overflow-hidden">
-              <Image
-                src="/images/app-screenshots/iphone-scheduly-ai.png"
-                alt="Scheduly AI"
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          </div>
-        </motion.div>
-      </div>
-
-      <div className="container-content relative z-10 text-center py-20">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate="visible"
-        >
-          {/* Badge */}
-          <motion.div
-            variants={itemVariants}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#FA4A8C]/10 to-[#945AE0]/10 border border-[#FA4A8C]/20 mb-8"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-left"
           >
-            <Sparkles className="w-4 h-4 text-[#FA4A8C]" />
-            <span className="text-sm font-medium text-gray-700">
-              {deviceInfo.isIOS ? 'Available Now' : 'Available on iOS'}
-            </span>
-          </motion.div>
-
-          {/* Main Heading */}
-          <motion.h1
-            variants={itemVariants}
-            className="text-6xl md:text-7xl lg:text-8xl font-bold mb-6 gradient-brand-text leading-tight"
-          >
-            <motion.span
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              Schedulr
-            </motion.span>
-          </motion.h1>
-
-          {/* Subtitle */}
-          <motion.p
-            variants={itemVariants}
-            className="text-2xl md:text-3xl font-semibold mb-4 text-gray-900"
-          >
-            Group Scheduling Made Simple
-          </motion.p>
-
-          {/* Description */}
-          <motion.p
-            variants={itemVariants}
-            className="text-lg md:text-xl mb-12 max-w-2xl mx-auto text-gray-600 leading-relaxed"
-          >
-            Find the perfect time to meet with your friends, family, or team. 
-            No more back-and-forth texts. Just smart, AI-powered scheduling.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            {deviceInfo.canOpenAppStore ? (
-              <motion.a
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white shadow-lg shadow-[#FA4A8C]/30 hover:shadow-xl hover:shadow-[#FA4A8C]/40 transition-all duration-300"
-              >
-                <Smartphone className="w-5 h-5" />
-                Download on the App Store
-              </motion.a>
-            ) : (
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex flex-col items-center justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white shadow-lg shadow-[#FA4A8C]/30 opacity-90"
-                title="Schedulr is available for iPhone and iPad. Open this page on your iOS device to download."
-              >
-                <span>iOS Only</span>
-                <span className="text-sm font-normal opacity-90">Open on iPhone/iPad</span>
-              </motion.div>
-            )}
+            {/* Badge */}
             <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 mb-8"
             >
+              <Sparkles className="w-4 h-4" />
+              <span className="text-sm font-bold tracking-wide uppercase">
+                {deviceInfo.isIOS ? 'Available Now' : 'Available on iOS'}
+              </span>
+            </motion.div>
+
+            {/* Main Heading */}
+            <h1 className="text-7xl md:text-8xl lg:text-9xl font-bold mb-6 leading-[0.9] tracking-tight font-heading text-gray-900">
+              Time <br />
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-coral-500">
+                Together.
+              </span>
+            </h1>
+
+            {/* Subtitle */}
+            <p className="text-xl md:text-2xl text-gray-500 mb-10 max-w-lg leading-relaxed font-medium">
+              Coordinate schedules with friends, family, or your team.
+              No more back-and-forth. Just simple, AI-powered planning.
+            </p>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              {deviceInfo.canOpenAppStore ? (
+                <a
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 justify-center rounded-full px-8 py-4 text-lg font-bold bg-indigo-600 text-white shadow-xl shadow-indigo-200 hover:bg-indigo-700 hover:scale-105 transition-all duration-300"
+                >
+                  <Smartphone className="w-5 h-5" />
+                  Download App
+                </a>
+              ) : (
+                <div
+                  className="inline-flex flex-col items-center justify-center rounded-full px-8 py-4 text-lg font-bold bg-gray-100 text-gray-400 cursor-not-allowed"
+                  title="iOS Only"
+                >
+                  <span>iOS Only</span>
+                </div>
+              )}
               <Link
                 href="#features"
-                className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] text-[#FA4A8C] hover:text-[#945AE0] border-2 border-[#FA4A8C] hover:border-[#945AE0] transition-all duration-300"
+                className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-bold text-gray-900 hover:bg-gray-50 border border-gray-200 transition-all duration-300"
               >
-                Learn More
+                How it works
                 <ArrowRight className="w-5 h-5" />
               </Link>
+            </div>
+
+            {/* Stats */}
+            <div className="mt-16 flex gap-12 border-t border-gray-100 pt-8">
+              <div>
+                <div className="text-3xl font-bold text-indigo-600 font-heading">100%</div>
+                <div className="text-sm text-gray-500 font-medium mt-1">Free for Groups</div>
+              </div>
+              <div>
+                <div className="text-3xl font-bold text-coral-500 font-heading">AI</div>
+                <div className="text-sm text-gray-500 font-medium mt-1">Smart Scheduling</div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right Column: Visuals */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative h-[600px] lg:h-[800px] w-full hidden lg:block"
+          >
+            {/* Abstract Background Blob */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-br from-indigo-100 via-purple-50 to-coral-50 rounded-full blur-3xl opacity-60 animate-pulse" />
+
+            {/* Main iPhone */}
+            <motion.div
+              animate={{ y: [0, -20, 0] }}
+              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[640px] z-20"
+            >
+              <div className="relative w-full h-full bg-gray-900 rounded-[3rem] p-3 shadow-2xl border-4 border-gray-800">
+                <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-32 h-6 bg-gray-900 rounded-b-2xl z-20" />
+                <div className="relative w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
+                  <Image
+                    src="/images/app-screenshots/iphone-dashboard.png"
+                    alt="Schedulr Dashboard"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Floating Elements */}
+            <motion.div
+              animate={{ y: [0, 30, 0], x: [0, 10, 0] }}
+              transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+              className="absolute top-20 right-10 z-30 bg-white p-4 rounded-2xl shadow-xl border border-gray-100 max-w-[200px]"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600">
+                  <Sparkles size={16} />
+                </div>
+                <div className="text-sm font-bold text-gray-900">Scheduly AI</div>
+              </div>
+              <div className="text-xs text-gray-500">"I found 3 times that work for everyone!"</div>
             </motion.div>
           </motion.div>
-
-          {/* Stats or additional info */}
-          <motion.div
-            variants={itemVariants}
-            className="mt-16 flex flex-wrap justify-center gap-8 text-center"
-          >
-            {[
-              { label: 'Calendar Sync', value: 'Automatic' },
-              { label: 'AI Powered', value: 'Scheduly' },
-            ].map((stat, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8 + index * 0.1 }}
-                className="px-6"
-              >
-                <div className="text-2xl font-bold gradient-brand-text">{stat.value}</div>
-                <div className="text-sm text-gray-600 mt-1">{stat.label}</div>
-              </motion.div>
-            ))}
-          </motion.div>
-        </motion.div>
+        </div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.5 }}
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-gray-400 rounded-full flex justify-center"
-        >
-          <motion.div
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-1.5 h-3 bg-gray-400 rounded-full mt-2"
-          />
-        </motion.div>
-      </motion.div>
     </section>
   );
 }
-

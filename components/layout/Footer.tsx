@@ -16,7 +16,7 @@ export function Footer() {
   ];
 
   return (
-    <footer className="bg-gray-50 border-t border-gray-200">
+    <footer className="bg-white border-t border-gray-100">
       <div className="container-content py-16 md:py-20">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
@@ -29,22 +29,22 @@ export function Footer() {
                 height={32}
                 className="rounded-lg"
               />
-              <span className="text-xl font-bold gradient-brand-text">Schedulr</span>
+              <span className="text-xl font-bold gradient-brand-text font-heading">Schedulr</span>
             </Link>
-            <p className="text-gray-800 text-sm max-w-md">
+            <p className="text-gray-600 text-sm max-w-md leading-relaxed">
               Group scheduling made simple. Find the perfect time to meet with your friends, family, or team.
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Quick Links</h3>
+            <h3 className="font-semibold text-gray-900 mb-4 font-heading">Quick Links</h3>
             <ul className="space-y-2">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-800 hover:text-[#FA4A8C] transition-colors text-sm"
+                    className="text-gray-600 hover:text-primary transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -55,13 +55,13 @@ export function Footer() {
 
           {/* Legal */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">Legal</h3>
+            <h3 className="font-semibold text-gray-900 mb-4 font-heading">Legal</h3>
             <ul className="space-y-2">
               {legalLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-gray-800 hover:text-[#FA4A8C] transition-colors text-sm"
+                    className="text-gray-600 hover:text-primary transition-colors text-sm"
                   >
                     {link.label}
                   </Link>
@@ -71,13 +71,13 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-gray-200 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-gray-800 text-sm">
+        <div className="mt-12 pt-8 border-t border-gray-100 flex flex-col md:flex-row justify-between items-center">
+          <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} Schedulr. All rights reserved.
           </p>
           <a
             href="mailto:support@schedulr.co.uk"
-            className="text-gray-800 hover:text-[#FA4A8C] transition-colors text-sm mt-4 md:mt-0"
+            className="text-gray-500 hover:text-primary transition-colors text-sm mt-4 md:mt-0"
           >
             support@schedulr.co.uk
           </a>

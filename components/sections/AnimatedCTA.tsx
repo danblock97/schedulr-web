@@ -15,120 +15,52 @@ export function AnimatedCTA() {
   const deviceInfo = useDeviceDetection();
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 via-white to-gray-50 relative overflow-hidden">
-      {/* Animated background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <motion.div
-          className="absolute top-0 left-1/4 w-96 h-96 bg-[#FA4A8C] rounded-full blur-3xl opacity-20"
-          animate={{
-            x: [0, 50, 0],
-            y: [0, 30, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            ease: 'easeInOut',
-          }}
-        />
-        <motion.div
-          className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#945AE0] rounded-full blur-3xl opacity-20"
-          animate={{
-            x: [0, -50, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.2, 1],
-          }}
-          transition={{
-            duration: 10,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: 1,
-          }}
-        />
-      </div>
-
-      <div className="container-content text-center relative z-10">
+    <section className="pt-10 pb-20 bg-white">
+      <div className="container-content">
         <motion.div
           ref={ref}
           initial="hidden"
           animate={inView ? 'visible' : 'hidden'}
           variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: {
-                staggerChildren: 0.2,
-              },
-            },
+            hidden: { opacity: 0, scale: 0.95 },
+            visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
           }}
+          className="relative rounded-[3rem] overflow-hidden bg-indigo-600 text-white px-8 py-20 text-center"
         >
-          <motion.div
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-[#FA4A8C]/10 to-[#945AE0]/10 border border-[#FA4A8C]/20 mb-6"
-          >
-            <Sparkles className="w-4 h-4 text-[#FA4A8C]" />
-            <span className="text-sm font-medium text-gray-700">
-              {deviceInfo.isIOS ? 'Available Now' : 'Available on iOS'}
-            </span>
-          </motion.div>
+          {/* Background Mesh */}
+          <div className="absolute inset-0 opacity-30">
+            <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-coral-500 rounded-full blur-[100px] -translate-x-1/2 -translate-y-1/2" />
+            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500 rounded-full blur-[100px] translate-x-1/2 translate-y-1/2" />
+          </div>
 
-          <motion.h2
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-gray-900"
-          >
-            Ready to simplify your{' '}
-            <span className="gradient-brand-text">scheduling</span>?
-          </motion.h2>
+          <div className="relative z-10 max-w-3xl mx-auto">
+            <h2 className="text-4xl md:text-6xl font-bold mb-6 font-heading leading-tight">
+              Ready to simplify your <br />
+              <span className="text-indigo-200">social life?</span>
+            </h2>
 
-          <motion.p
-            variants={{
-              hidden: { opacity: 0, y: 30 },
-              visible: { opacity: 1, y: 0 },
-            }}
-            className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto"
-          >
-            {deviceInfo.canOpenAppStore
-              ? 'Download Schedulr now and experience the easiest way to coordinate group schedules.'
-              : 'Schedulr is available for iPhone and iPad. Open this page on your iOS device to download and start coordinating schedules effortlessly.'}
-          </motion.p>
+            <p className="text-xl text-indigo-100 mb-10 max-w-2xl mx-auto">
+              Join thousands of groups coordinating their schedules effortlessly.
+            </p>
 
-          {deviceInfo.canOpenAppStore ? (
-            <motion.a
-              href={APP_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              variants={{
-                hidden: { opacity: 0, scale: 0.9 },
-                visible: { opacity: 1, scale: 1 },
-              }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white shadow-lg shadow-[#FA4A8C]/30 hover:shadow-xl hover:shadow-[#FA4A8C]/40 transition-all duration-300"
-            >
-              <Smartphone className="w-5 h-5" />
-              Download on the App Store
-            </motion.a>
-          ) : (
-            <motion.div
-              variants={{
-                hidden: { opacity: 0, scale: 0.9 },
-                visible: { opacity: 1, scale: 1 },
-              }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex flex-col items-center justify-center rounded-full px-8 py-4 text-lg font-semibold min-h-[52px] gradient-brand text-white shadow-lg shadow-[#FA4A8C]/30 opacity-90"
-              title="Schedulr is available for iPhone and iPad. Open this page on your iOS device to download."
-            >
-              <span>iOS Only</span>
-              <span className="text-sm font-normal opacity-90">Open on iPhone/iPad</span>
-            </motion.div>
-          )}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              {deviceInfo.canOpenAppStore ? (
+                <a
+                  href={APP_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-3 justify-center rounded-full px-8 py-4 text-lg font-bold bg-white text-indigo-600 shadow-xl hover:bg-indigo-50 hover:scale-105 transition-all duration-300"
+                >
+                  <Smartphone className="w-5 h-5" />
+                  Download Now
+                </a>
+              ) : (
+                <div className="inline-flex flex-col items-center justify-center rounded-full px-8 py-4 text-lg font-bold bg-indigo-800/50 text-indigo-300 cursor-not-allowed">
+                  <span>iOS Only</span>
+                </div>
+              )}
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

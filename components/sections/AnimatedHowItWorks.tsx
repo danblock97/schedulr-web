@@ -34,32 +34,31 @@ export function AnimatedHowItWorks() {
   return (
     <section className="py-20 bg-gradient-to-b from-gray-50 via-white to-gray-50 relative overflow-hidden">
       {/* Animated background elements */}
+      {/* Animated background elements - Optimized */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(3)].map((_, i) => (
+        {[...Array(2)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute rounded-full blur-3xl opacity-20"
             style={{
-              width: `${300 + i * 100}px`,
-              height: `${300 + i * 100}px`,
-              background: i === 0 
+              width: `${400 + i * 100}px`,
+              height: `${400 + i * 100}px`,
+              background: i === 0
                 ? 'linear-gradient(135deg, #FA4A8C, #945AE0)'
-                : i === 1
-                ? 'linear-gradient(135deg, #945AE0, #45A1FA)'
                 : 'linear-gradient(135deg, #45A1FA, #2ECDA8)',
-              left: `${20 + i * 30}%`,
-              top: `${10 + i * 20}%`,
+              left: `${20 + i * 40}%`,
+              top: `${10 + i * 30}%`,
+              willChange: 'transform',
             }}
             animate={{
-              x: [0, 50, 0],
-              y: [0, 30, 0],
-              scale: [1, 1.1, 1],
+              x: [0, 30, 0],
+              y: [0, 20, 0],
+              scale: [1, 1.05, 1],
             }}
             transition={{
-              duration: 8 + i * 2,
+              duration: 10 + i * 5,
               repeat: Infinity,
               ease: 'easeInOut',
-              delay: i * 1.5,
             }}
           />
         ))}
@@ -84,7 +83,7 @@ export function AnimatedHowItWorks() {
               Get started in three simple steps
             </p>
           </motion.div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {howItWorksSteps.map((step, index) => {
               const Icon = step.icon;

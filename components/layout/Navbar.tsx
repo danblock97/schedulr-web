@@ -18,108 +18,87 @@ export function Navbar() {
     { href: '/features', label: 'Features' },
     { href: '/pricing', label: 'Pricing' },
     { href: '/support', label: 'Support' },
-    { href: '/about', label: 'About' },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-200">
-      <div className="container-content">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <Image
-              src="/images/schedulr-logo.png"
-              alt="Schedulr"
-              width={32}
-              height={32}
-              className="rounded-lg"
-            />
-            <span className="text-xl font-bold gradient-brand-text">Schedulr</span>
-          </Link>
+    <div className="fixed top-6 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
+      <nav className="floating-nav rounded-full px-2 py-2 pointer-events-auto w-full max-w-3xl mx-auto flex items-center justify-between">
+        {/* Logo */}
+        <Link href="/" className="flex items-center space-x-2 px-4">
+          <Image
+            src="/images/schedulr-logo.png"
+            alt="Schedulr"
+            width={32}
+            height={32}
+            className="rounded-lg"
+          />
+          <span className="text-lg font-bold text-gray-900 font-heading">Schedulr</span>
+        </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="text-gray-700 hover:text-[#FA4A8C] transition-colors font-medium"
-              >
-                {link.label}
-              </Link>
-            ))}
-            {deviceInfo.canOpenAppStore ? (
-              <a
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold gradient-brand text-white shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                <Smartphone className="w-4 h-4" />
-                Download
-              </a>
-            ) : (
-              <Button
-                variant="primary"
-                size="md"
-                disabled
-                title="Schedulr is available for iPhone and iPad. Open this page on your iOS device to download."
-              >
-                iOS Only
-              </Button>
-            )}
-          </div>
+        {/* Desktop Navigation */}
+        <div className="hidden md:flex items-center space-x-1 bg-gray-100/50 rounded-full px-1 py-1">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-white rounded-full transition-all duration-200"
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+
+        {/* Action Button */}
+        <div className="flex items-center px-2">
+          {deviceInfo.canOpenAppStore ? (
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold bg-indigo-600 text-white shadow-lg shadow-indigo-200 hover:bg-indigo-700 hover:shadow-indigo-300 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <Smartphone className="w-4 h-4" />
+              <span className="hidden sm:inline">Download</span>
+            </a>
+          ) : (
+            <Button
+              variant="primary"
+              size="sm"
+              disabled
+              className="opacity-50 cursor-not-allowed bg-gray-200 text-gray-500"
+              title="iOS Only"
+            >
+              iOS Only
+            </Button>
+          )}
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2 text-gray-700"
+            className="md:hidden ml-2 p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
+      </nav>
 
-        {/* Mobile Navigation */}
-        {mobileMenuOpen && (
-          <div className="md:hidden pb-4 space-y-4 border-t border-gray-200 mt-4 pt-4">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="block text-gray-700 hover:text-[#FA4A8C] transition-colors font-medium py-2"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            ))}
-            {deviceInfo.canOpenAppStore ? (
-              <a
-                href={APP_STORE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => setMobileMenuOpen(false)}
-                className="inline-flex items-center justify-center gap-2 w-full px-4 py-2 rounded-full text-sm font-semibold gradient-brand text-white shadow-md hover:shadow-lg transition-all duration-300"
-              >
-                <Smartphone className="w-4 h-4" />
-                Download on App Store
-              </a>
-            ) : (
-              <Button
-                variant="primary"
-                size="md"
-                className="w-full"
-                disabled
-                onClick={() => setMobileMenuOpen(false)}
-                title="Schedulr is available for iPhone and iPad. Open this page on your iOS device to download."
-              >
-                iOS Only
-              </Button>
-            )}
-          </div>
-        )}
-      </div>
-    </nav>
+      {/* Mobile Menu Overlay */}
+      {mobileMenuOpen && (
+        <div className="absolute top-full left-4 right-4 mt-2 p-4 bg-white rounded-2xl shadow-xl border border-gray-100 pointer-events-auto md:hidden flex flex-col space-y-2 animate-in slide-in-from-top-4 fade-in duration-200">
+          {navLinks.map((link) => (
+            <Link
+              key={link.href}
+              href={link.href}
+              className="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl font-medium transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 
