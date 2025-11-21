@@ -8,6 +8,7 @@ export function Footer() {
     { href: '/pricing', label: 'Pricing' },
     { href: '/support', label: 'Support' },
     { href: '/about', label: 'About' },
+    { href: '/changelog', label: 'Changelog' },
   ];
 
   const legalLinks = [
