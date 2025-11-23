@@ -19,6 +19,14 @@ interface Version {
 // Release dates - timestamps automatically calculate relative time from these dates
 const versions: Version[] = [
   {
+    version: '1.2.2',
+    releaseDate: new Date('2025-11-23T12:00:00'), // Nov 23, 2025
+    changes: [
+      'Fixed a bug where editing an event would cause it to duplicate',
+      'Added event notes to the event details so you no longer need to edit the event to see notes.',
+    ],
+  },
+  {
     version: '1.2.1',
     releaseDate: new Date('2025-11-21T12:00:00'), // Nov 21, 2025
     changes: [
