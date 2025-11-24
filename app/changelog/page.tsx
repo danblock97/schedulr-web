@@ -19,6 +19,16 @@ interface Version {
 // Release dates - timestamps automatically calculate relative time from these dates
 const versions: Version[] = [
   {
+    version: '1.3.0',
+    releaseDate: new Date('2025-11-24T12:00:00'), // Nov 24, 2025
+    changes: [
+      'Added widget support with small, medium, and large sizes',
+      'Widgets display upcoming events in the next 7 days',
+      'Widgets auto-rotate every 10 minutes to show different events',
+      'Added lock screen widget option for quick access to your schedule',
+    ],
+  },
+  {
     version: '1.2.2',
     releaseDate: new Date('2025-11-23T12:00:00'), // Nov 23, 2025
     changes: [
