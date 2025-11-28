@@ -19,6 +19,15 @@ interface Version {
 // Release dates - timestamps automatically calculate relative time from these dates
 const versions: Version[] = [
   {
+    version: '1.3.1',
+    releaseDate: new Date('2025-11-26T12:00:00'), // Nov 26, 2025
+    changes: [
+      'Added speech to text for Scheduly, our AI assistant available for pro users',
+      'Added quick access widgets for Scheduly',
+      'Fixed UI around all day events on the up next widgets',
+    ],
+  },
+  {
     version: '1.3.0',
     releaseDate: new Date('2025-11-24T12:00:00'), // Nov 24, 2025
     changes: [
