@@ -2,7 +2,7 @@
 
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { Mail, Bug, Sparkles, MessageCircle, ArrowRight } from 'lucide-react';
+import { Mail, MessageCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { AnimatedGradient } from '@/components/ui/AnimatedGradient';
@@ -181,39 +181,24 @@ export default function SupportPage() {
                 className="flex items-center justify-center gap-4 mb-8"
               >
                 <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent w-32"></div>
-                <span className="text-sm text-gray-400 font-medium">or</span>
+                <span className="text-sm text-gray-400 font-medium">or submit feedback below</span>
                 <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent w-32"></div>
               </motion.div>
 
-              {/* Form Links */}
+              {/* Notion Form Embed */}
               <motion.div
                 variants={itemVariants}
-                className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+                className="w-full max-w-2xl mx-auto rounded-2xl shadow-lg shadow-indigo-100 overflow-hidden border border-gray-100"
               >
-                <motion.a
-                  href="https://danblock97.atlassian.net/jira/software/c/form/769e1b07-92ad-4c12-8f28-902791f5a74d?atlOrigin=eyJpIjoiNDZiNzMxOWM0NDE5NDc2Y2IzMDU4NmY1M2JiNzBjNjMiLCJwIjoiaiJ9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-bold min-h-[52px] bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 shadow-sm hover:shadow-md transition-all duration-300"
-                >
-                  <Bug className="w-5 h-5 text-coral-500" />
-                  Report a Bug
-                  <ArrowRight className="w-4 h-4 text-gray-400" />
-                </motion.a>
-                <motion.a
-                  href="https://danblock97.atlassian.net/jira/software/c/form/e56fc642-7e09-4a9a-99ae-2f622abd3808?atlOrigin=eyJpIjoiNjc2M2E3YmMxMGU4NDdiMzk3NjY2Mjc1ZTE2NjAzMDIiLCJwIjoiaiJ9"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-bold min-h-[52px] bg-white text-gray-900 border border-gray-200 hover:bg-gray-50 shadow-sm hover:shadow-md transition-all duration-300"
-                >
-                  <Sparkles className="w-5 h-5 text-indigo-500" />
-                  Request a Feature
-                  <ArrowRight className="w-4 h-4 text-gray-400" />
-                </motion.a>
+                <iframe
+                  src="https://animated-fine-273.notion.site/ebd/2bbf8761b64981c3843efeff3c683668"
+                  width="100%"
+                  height="600"
+                  frameBorder="0"
+                  allowFullScreen
+                  className="w-full"
+                  title="Bug Report & Feature Request Form"
+                />
               </motion.div>
 
               {/* Additional Info */}
@@ -223,7 +208,7 @@ export default function SupportPage() {
               >
                 {[
                   { label: 'Response Time', value: '< 24 hours' },
-                  { label: 'Support Type', value: 'Email & Forms' },
+                  { label: 'Support Type', value: 'Email & Feedback Form' },
                 ].map((stat, index) => (
                   <motion.div
                     key={index}
