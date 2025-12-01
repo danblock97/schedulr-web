@@ -28,7 +28,7 @@ const pricingFAQ = [
   },
   {
     question: 'What\'s the difference between Free and Pro?',
-    answer: 'Free tier: 1 group, 5 members per group, calendar sync, basic support. Pro tier: 5 groups, 10 members per group, calendar sync, AI Assistant (100 requests/month), priority support. Both tiers include all core scheduling features.',
+    answer: 'Free tier: 1 group, 5 members per group, calendar sync, basic support. Pro tier: unlimited groups, unlimited members per group, calendar sync, AI Assistant (300 requests/month), priority support. Both tiers include all core scheduling features.',
   },
   {
     question: 'Can I change my subscription tier?',

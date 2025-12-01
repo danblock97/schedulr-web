@@ -19,6 +19,14 @@ interface Version {
 // Release dates - timestamps automatically calculate relative time from these dates
 const versions: Version[] = [
   {
+    version: '1.3.3',
+    releaseDate: new Date('2025-12-01T12:00:00'), // Dec 1, 2025
+    changes: [
+      'UI overhaul for login screen, onboarding, profile view and dashboard',
+      'Pro value improvements, same price gets you unlimited groups, unlimited members and 300 requests per month',
+    ],
+  },
+  {
     version: '1.3.2',
     releaseDate: new Date('2025-11-27T12:00:00'), // Nov 27, 2025
     changes: [

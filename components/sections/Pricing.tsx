@@ -11,10 +11,10 @@ const freeFeatures = [
 ];
 
 const proFeatures = [
-  { included: true, text: '5 Groups' },
-  { included: true, text: '10 Members per group' },
+  { included: true, text: 'Unlimited Groups' },
+  { included: true, text: 'Unlimited Members per group' },
   { included: true, text: 'Calendar Sync' },
-  { included: true, text: 'AI Assistant (100 requests/month)' },
+  { included: true, text: 'AI Assistant (300 requests/month)' },
   { included: true, text: 'Priority support' },
 ];
 
