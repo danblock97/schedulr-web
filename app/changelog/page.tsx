@@ -19,6 +19,14 @@ interface Version {
 // Release dates - timestamps automatically calculate relative time from these dates
 const versions: Version[] = [
   {
+    version: '1.4.0',
+    releaseDate: new Date('2025-12-05T12:00:00'), // Dec 5, 2025
+    changes: [
+      'Subtle UI improvements',
+      'Added more meaningful notifications which can be personalised in profile settings in profile > app settings',
+    ],
+  },
+  {
     version: '1.3.3',
     releaseDate: new Date('2025-12-01T12:00:00'), // Dec 1, 2025
     changes: [
