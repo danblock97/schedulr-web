@@ -19,6 +19,15 @@ interface Version {
 // Release dates - timestamps automatically calculate relative time from these dates
 const versions: Version[] = [
   {
+    version: '1.4.1',
+    releaseDate: new Date('2025-12-06T12:00:00'), // Dec 6, 2025
+    changes: [
+      'Group owners can now remove group members',
+      'Fixed dark mode theme to be more readable',
+      'Fixed app theme not applying in all cases. (123 instances fixed across the app)',
+    ],
+  },
+  {
     version: '1.4.0',
     releaseDate: new Date('2025-12-05T12:00:00'), // Dec 5, 2025
     changes: [
