@@ -61,6 +61,13 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
+        <div
+          className="sticky top-0 z-50 w-full bg-amber-100 border-b border-amber-200 text-amber-900 text-center px-4 py-3 text-sm"
+          role="alert"
+        >
+          <span className="font-semibold">Authentication notice:</span>{" "}
+          Supabase is experiencing an outage affecting login. You may be signed out and unable to log in until service is restored.
+        </div>
         {children}
         <Analytics />
         <SpeedInsights />
