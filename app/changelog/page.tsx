@@ -19,6 +19,16 @@ interface Version {
 // Release dates - timestamps automatically calculate relative time from these dates
 const versions: Version[] = [
   {
+    version: '1.5.0',
+    releaseDate: new Date('2025-12-10T12:00:00'), // Dec 10, 2025
+    changes: [
+      'Added AI Chat persistence',
+      'Added quick prompts for AI',
+      'Added a quick time proposal to quickly set up meetings either using our calendar engine or use of Scheduly AI',
+      'Improved natural language recognition with Scheduly AI',
+    ],
+  },
+  {
     version: '1.4.1',
     releaseDate: new Date('2025-12-06T12:00:00'), // Dec 6, 2025
     changes: [
