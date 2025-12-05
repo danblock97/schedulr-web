@@ -19,6 +19,13 @@ interface Version {
 // Release dates - timestamps automatically calculate relative time from these dates
 const versions: Version[] = [
   {
+    version: '1.5.1',
+    releaseDate: new Date('2025-12-12T12:00:00'), // Dec 12, 2025
+    changes: [
+      'Fixed Sign in with Apple requiring a long press to work',
+    ],
+  },
+  {
     version: '1.5.0',
     releaseDate: new Date('2025-12-10T12:00:00'), // Dec 10, 2025
     changes: [
