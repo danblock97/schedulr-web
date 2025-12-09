@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const response = NextResponse.next();
 
   // This is a static marketing site - we don't set or use cookies
-  // The middleware ensures no cookies are accidentally set
+  // The proxy ensures no cookies are accidentally set
   // Note: We can't remove Set-Cookie headers here, but since this is a static site
   // with no authentication or session management, no cookies should be set
 

@@ -10,38 +10,41 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function formatRelativeTime(date: Date): string {
   const now = new Date();
-  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+  const diffInSeconds = Math.floor(
+    Math.abs(date.getTime() - now.getTime()) / 1000,
+  );
+  const isFuture = date.getTime() > now.getTime();
 
   if (diffInSeconds < 60) {
-    return 'just now';
+    return isFuture ? 'in <1m' : 'just now';
   }
 
   const diffInMinutes = Math.floor(diffInSeconds / 60);
   if (diffInMinutes < 60) {
-    return `${diffInMinutes}m ago`;
+    return isFuture ? `in ${diffInMinutes}m` : `${diffInMinutes}m ago`;
   }
 
   const diffInHours = Math.floor(diffInMinutes / 60);
   if (diffInHours < 24) {
-    return `${diffInHours}h ago`;
+    return isFuture ? `in ${diffInHours}h` : `${diffInHours}h ago`;
   }
 
   const diffInDays = Math.floor(diffInHours / 24);
   if (diffInDays < 7) {
-    return `${diffInDays}d ago`;
+    return isFuture ? `in ${diffInDays}d` : `${diffInDays}d ago`;
   }
 
   const diffInWeeks = Math.floor(diffInDays / 7);
   if (diffInWeeks < 4) {
-    return `${diffInWeeks}w ago`;
+    return isFuture ? `in ${diffInWeeks}w` : `${diffInWeeks}w ago`;
   }
 
   const diffInMonths = Math.floor(diffInDays / 30);
   if (diffInMonths < 12) {
-    return `${diffInMonths}mo ago`;
+    return isFuture ? `in ${diffInMonths}mo` : `${diffInMonths}mo ago`;
   }
 
   const diffInYears = Math.floor(diffInDays / 365);
-  return `${diffInYears}y ago`;
+  return isFuture ? `in ${diffInYears}y` : `${diffInYears}y ago`;
 }
 

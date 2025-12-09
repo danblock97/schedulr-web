@@ -3,7 +3,6 @@ import { Footer } from '@/components/layout/Footer';
 import type { Metadata } from 'next';
 import { ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
-import { formatRelativeTime } from '@/lib/utils';
 
 export const metadata: Metadata = {
   title: 'Changelog - Schedulr',
@@ -12,22 +11,34 @@ export const metadata: Metadata = {
 
 interface Version {
   version: string;
-  releaseDate: Date;
+  displayDate: string;
   changes: string[];
 }
 
-// Release dates - timestamps automatically calculate relative time from these dates
+// Release dates - hardcoded dates
 const versions: Version[] = [
   {
+    version: '1.6.0',
+    displayDate: 'Dec 10, 2025',
+    changes: [
+      'Added quick follow up buttons in Scheduly conversations',
+      'Improved UI of loading screen',
+      'Improved UI of the navbar',
+      'Improved UI of Scheduly',
+      'Improved UI of Calendar',
+      'Added timed notifications you can opt out of in profile settings.',
+    ],
+  },
+  {
     version: '1.5.1',
-    releaseDate: new Date('2025-12-12T12:00:00'), // Dec 12, 2025
+    displayDate: 'Dec 5, 2025',
     changes: [
       'Fixed Sign in with Apple requiring a long press to work',
     ],
   },
   {
     version: '1.5.0',
-    releaseDate: new Date('2025-12-10T12:00:00'), // Dec 10, 2025
+    displayDate: 'Dec 5, 2025',
     changes: [
       'Added AI Chat persistence',
       'Added quick prompts for AI',
@@ -37,7 +48,7 @@ const versions: Version[] = [
   },
   {
     version: '1.4.1',
-    releaseDate: new Date('2025-12-06T12:00:00'), // Dec 6, 2025
+    displayDate: 'Dec 4, 2025',
     changes: [
       'Group owners can now remove group members',
       'Fixed dark mode theme to be more readable',
@@ -46,7 +57,7 @@ const versions: Version[] = [
   },
   {
     version: '1.4.0',
-    releaseDate: new Date('2025-12-05T12:00:00'), // Dec 5, 2025
+    displayDate: 'Dec 3, 2025',
     changes: [
       'Subtle UI improvements',
       'Added more meaningful notifications which can be personalised in profile settings in profile > app settings',
@@ -54,7 +65,7 @@ const versions: Version[] = [
   },
   {
     version: '1.3.3',
-    releaseDate: new Date('2025-12-01T12:00:00'), // Dec 1, 2025
+    displayDate: 'Dec 2, 2025',
     changes: [
       'UI overhaul for login screen, onboarding, profile view and dashboard',
       'Pro value improvements, same price gets you unlimited groups, unlimited members and 300 requests per month',
@@ -62,14 +73,14 @@ const versions: Version[] = [
   },
   {
     version: '1.3.2',
-    releaseDate: new Date('2025-11-27T12:00:00'), // Nov 27, 2025
+    displayDate: 'Nov 29, 2025',
     changes: [
       'Fixed a bug where personal events were showing up in widgets. Widgets now only show upcoming group events.',
     ],
   },
   {
     version: '1.3.1',
-    releaseDate: new Date('2025-11-26T12:00:00'), // Nov 26, 2025
+    displayDate: 'Nov 29, 2025',
     changes: [
       'Added speech to text for Scheduly, our AI assistant available for pro users',
       'Added quick access widgets for Scheduly',
@@ -78,7 +89,7 @@ const versions: Version[] = [
   },
   {
     version: '1.3.0',
-    releaseDate: new Date('2025-11-24T12:00:00'), // Nov 24, 2025
+    displayDate: 'Nov 25, 2025',
     changes: [
       'Added widget support with small, medium, and large sizes',
       'Widgets display upcoming events in the next 7 days',
@@ -88,7 +99,7 @@ const versions: Version[] = [
   },
   {
     version: '1.2.2',
-    releaseDate: new Date('2025-11-23T12:00:00'), // Nov 23, 2025
+    displayDate: 'Nov 23, 2025',
     changes: [
       'Fixed a bug where editing an event would cause it to duplicate',
       'Added event notes to the event details so you no longer need to edit the event to see notes.',
@@ -96,7 +107,7 @@ const versions: Version[] = [
   },
   {
     version: '1.2.1',
-    releaseDate: new Date('2025-11-21T12:00:00'), // Nov 21, 2025
+    displayDate: 'Nov 21, 2025',
     changes: [
       'Added a small notification bell in app to view any missed invited',
       'Added a route to event details when clicking a notification from anywhere',
@@ -107,7 +118,7 @@ const versions: Version[] = [
   },
   {
     version: '1.2',
-    releaseDate: new Date('2025-11-20T12:00:00'), // Nov 20, 2025
+    displayDate: 'Nov 20, 2025',
     changes: [
       'Fixed a bug where push notifications were not coming through if the user allowed notifications',
       'Fixed some theme bugs where the user app theme was not applying 100% where it needed to be',
@@ -116,7 +127,7 @@ const versions: Version[] = [
   },
   {
     version: '1.1.2',
-    releaseDate: new Date('2025-11-17T12:00:00'), // Nov 17, 2025
+    displayDate: 'Nov 18, 2025',
     changes: [
       'Added easier support access in your profile',
       'Improved password reset functionality',
@@ -125,7 +136,7 @@ const versions: Version[] = [
   },
   {
     version: 'v1.1.1',
-    releaseDate: new Date('2025-11-17T12:00:00'), // Nov 17, 2025
+    displayDate: 'Nov 17, 2025',
     changes: [
       'Fixed a bug where you couldn\'t scroll on timeline calendar views where you had more than 3 events.',
       'Fixed a bug where group events would duplicate across app and apple calendar per user. This is now much cleaner.',
@@ -133,8 +144,8 @@ const versions: Version[] = [
     ],
   },
   {
-    version: 'v1.1',
-    releaseDate: new Date('2025-11-16T12:00:00'), // Nov 16, 2025
+    version: 'v1.1.0',
+    displayDate: 'Nov 16, 2025',
     changes: [
       'Fixed a bug where creating events were not syncing to Apple Calendar, this now syncs to all users who are invited.',
       'Cross group events have been added, marked as \'busy\' allowing you and scheduly to know what days are free even if you have events in other groups while keeping them events a secret',
@@ -143,8 +154,8 @@ const versions: Version[] = [
     ],
   },
   {
-    version: '1.0',
-    releaseDate: new Date('2025-11-14T12:00:00'), // Nov 14, 2025
+    version: 'v1.0',
+    displayDate: 'Nov 15, 2025',
     changes: [],
   },
 ];
@@ -187,7 +198,7 @@ export default function ChangelogPage() {
                           Version {version.version}
                         </h2>
                         <span className="text-sm text-gray-500 font-medium">
-                          {formatRelativeTime(version.releaseDate)}
+                          {version.displayDate}
                         </span>
                       </div>
                     </div>
