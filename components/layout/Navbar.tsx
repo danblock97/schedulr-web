@@ -18,14 +18,15 @@ export function Navbar() {
     { href: '/features', label: 'Features' },
     { href: '/pricing', label: 'Pricing' },
     { href: '/support', label: 'Support' },
+    { href: '/issues', label: 'Issues' },
     { href: '/changelog', label: 'Changelog' },
   ];
 
   return (
     <div className="fixed top-16 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
-      <nav className="floating-nav rounded-full px-2 py-2 pointer-events-auto w-full max-w-3xl mx-auto flex items-center justify-between">
+      <nav className="floating-nav rounded-full px-2 py-2 pointer-events-auto w-full max-w-5xl mx-auto flex items-center justify-between gap-3">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2 px-4">
+        <Link href="/" className="flex items-center space-x-2 px-4 shrink-0">
           <Image
             src="/images/schedulr-logo.png"
             alt="Schedulr"
@@ -33,11 +34,11 @@ export function Navbar() {
             height={32}
             className="rounded-lg"
           />
-          <span className="text-lg font-bold text-gray-900 font-heading">Schedulr</span>
+          <span className="text-lg font-bold text-gray-900 font-heading whitespace-nowrap">Schedulr</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center space-x-1 bg-gray-100/50 rounded-full px-1 py-1">
+        <div className="hidden md:flex items-center space-x-1 bg-gray-100/50 rounded-full px-1 py-1 flex-1 justify-center min-w-0">
           {navLinks.map((link) => (
             <Link
               key={link.href}

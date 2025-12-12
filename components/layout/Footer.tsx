@@ -7,6 +7,7 @@ export function Footer() {
     { href: '/features', label: 'Features' },
     { href: '/pricing', label: 'Pricing' },
     { href: '/support', label: 'Support' },
+    { href: '/issues', label: 'Issues' },
     { href: '/about', label: 'About' },
     { href: '/changelog', label: 'Changelog' },
   ];

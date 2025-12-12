@@ -7,6 +7,8 @@ import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { AnimatedGradient } from '@/components/ui/AnimatedGradient';
 import { OrbitalBackground } from '@/components/ui/OrbitalBackground';
+import { BugReportForm } from '@/components/linear/BugReportForm';
+import Link from 'next/link';
 
 interface Particle {
   startX: number;
@@ -181,24 +183,26 @@ export default function SupportPage() {
                 className="flex items-center justify-center gap-4 mb-8"
               >
                 <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent w-32"></div>
-                <span className="text-sm text-gray-400 font-medium">or submit feedback below</span>
+                <span className="text-sm text-gray-400 font-medium">or report a bug below</span>
                 <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent w-32"></div>
               </motion.div>
 
-              {/* Notion Form Embed */}
+              {/* Bug report form */}
               <motion.div
                 variants={itemVariants}
-                className="w-full max-w-2xl mx-auto rounded-2xl shadow-lg shadow-indigo-100 overflow-hidden border border-gray-100"
+                className="w-full max-w-2xl mx-auto"
               >
-                <iframe
-                  src="https://animated-fine-273.notion.site/ebd/2bbf8761b64981c3843efeff3c683668"
-                  width="100%"
-                  height="600"
-                  frameBorder="0"
-                  allowFullScreen
-                  className="w-full"
-                  title="Bug Report & Feature Request Form"
-                />
+                <BugReportForm />
+              </motion.div>
+
+              {/* Subtle link to issues */}
+              <motion.div variants={itemVariants} className="mt-4">
+                <Link
+                  href="/issues"
+                  className="text-sm text-gray-500 hover:text-gray-900 underline underline-offset-4 transition-colors"
+                >
+                  View public issues
+                </Link>
               </motion.div>
 
               {/* Additional Info */}
