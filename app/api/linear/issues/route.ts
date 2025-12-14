@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { listLabelIssues } from '@/lib/linear';
+import { listIssues } from '@/lib/linear';
 
 export async function GET() {
   try {
-    const issues = await listLabelIssues({ first: 50 });
+    const issues = await listIssues(['Schedulr App', 'Bug'], { first: 50 });
     return NextResponse.json({ issues }, { status: 200 });
   } catch (err) {
     console.error('Linear issues list failed', err);
