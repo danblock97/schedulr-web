@@ -18,6 +18,15 @@ interface Version {
 // Release dates - hardcoded dates
 const versions: Version[] = [
   {
+    version: '1.6.2',
+    displayDate: 'Dec 15, 2025',
+    changes: [
+      'Added a button to easily request a feature to the app',
+      'Changed the UI of the support button to be better identifiable for bug reporting',
+      'Improved the UI of the navbar for better user experience.',
+    ],
+  },
+  {
     version: '1.6.1',
     displayDate: 'Dec 12, 2025',
     changes: [
