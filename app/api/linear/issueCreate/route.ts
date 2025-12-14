@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
-import { createLinearIssue, type LinearPriority } from '@/lib/linear';
+import { createLinearIssue } from '@/lib/linear';
+import { type LinearPriority } from '@/lib/linear-shared';
 import { isTurnstileBypassedInDev, verifyTurnstile } from '@/lib/turnstile';
 
 type CreateIssueBody = {
@@ -7,6 +8,7 @@ type CreateIssueBody = {
   description?: unknown;
   priority?: unknown;
   turnstileToken?: unknown;
+  type?: unknown;
 };
 
 function isNonEmptyString(v: unknown): v is string {
@@ -36,6 +38,7 @@ export async function POST(req: Request) {
   const description = isNonEmptyString(body.description) ? body.description.trim() : '';
   const priority = normalizePriority(body.priority);
   const turnstileToken = isNonEmptyString(body.turnstileToken) ? body.turnstileToken.trim() : '';
+  const type = isNonEmptyString(body.type) ? body.type.trim().toLowerCase() : 'bug';
 
   if (title.length < 3 || title.length > 120) {
     return NextResponse.json({ error: 'Title must be between 3 and 120 characters' }, { status: 400 });
@@ -56,8 +59,16 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Spam check failed' }, { status: 400 });
   }
 
+  const labels = ['Schedulr App'];
+  if (type === 'feature') {
+    labels.push('Feature');
+  } else {
+    // Default to bug
+    labels.push('Bug');
+  }
+
   try {
-    const issue = await createLinearIssue({ title, description, priority });
+    const issue = await createLinearIssue({ title, description, priority, labels });
     return NextResponse.json({ issue }, { status: 200 });
   } catch (err) {
     // Avoid leaking internal details to the client; keep details server-side.

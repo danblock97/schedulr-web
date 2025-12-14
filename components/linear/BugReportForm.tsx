@@ -141,6 +141,7 @@ export function BugReportForm() {
           description,
           priority,
           turnstileToken,
+          type: 'bug',
         }),
       });
 
@@ -231,7 +232,7 @@ export function BugReportForm() {
               <div>
                 <h2 className="text-xl md:text-2xl font-bold text-gray-900 font-heading">Report a bug</h2>
                 <p className="text-sm md:text-base text-gray-600 mt-1">
-                  This goes straight into our backlog (label: <span className="font-semibold">Schedulr</span>).
+                  This goes straight into our backlog (label: <span className="font-semibold">Schedulr, Bug</span>).
                 </p>
               </div>
             </div>

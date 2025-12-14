@@ -1,4 +1,9 @@
 import 'server-only';
+import {
+  type LinearPriority,
+  type PublicLinearIssue,
+  linearPriorityToNumber,
+} from './linear-shared';
 
 type GraphQLResponse<T> = {
   data?: T;
@@ -13,7 +18,8 @@ function requireEnv(name: string): string {
 
 const LINEAR_API_KEY = requireEnv('LINEAR_API_KEY');
 const LINEAR_TEAM_KEY = requireEnv('LINEAR_TEAM_KEY');
-const LINEAR_LABEL_NAME = requireEnv('LINEAR_LABEL_NAME');
+// Custom labels will be passed dynamically.
+
 
 async function linearGraphql<TData>(
   query: string,
@@ -42,48 +48,10 @@ async function linearGraphql<TData>(
   return json.data;
 }
 
-export type LinearPriority = 'none' | 'urgent' | 'high' | 'medium' | 'low';
 
-export function linearPriorityToNumber(priority: LinearPriority): number {
-  switch (priority) {
-    case 'none':
-      return 0;
-    case 'urgent':
-      return 1;
-    case 'high':
-      return 2;
-    case 'medium':
-      return 3;
-    case 'low':
-      return 4;
-    default: {
-      const _exhaustive: never = priority;
-      return _exhaustive;
-    }
-  }
-}
-
-export function linearPriorityLabel(priority: number): string {
-  // Linear: 0 = no priority, 1..4 = urgent..low
-  switch (priority) {
-    case 0:
-      return 'No priority';
-    case 1:
-      return 'Urgent';
-    case 2:
-      return 'High';
-    case 3:
-      return 'Medium';
-    case 4:
-      return 'Low';
-    default:
-      return `P${priority}`;
-  }
-}
 
 type LinearContext = {
   teamId: string;
-  labelId: string;
   backlogStateId: string;
 };
 
@@ -135,11 +103,8 @@ async function resolveContext(): Promise<LinearContext> {
       throw new Error(`Linear state 'Backlog' not found for team ${LINEAR_TEAM_KEY}. Found: ${names}`);
     }
 
-    const labelId = await resolveLabelId(team.id);
-
     return {
       teamId: team.id,
-      labelId,
       backlogStateId: backlogState.id,
     };
   })();
@@ -147,7 +112,7 @@ async function resolveContext(): Promise<LinearContext> {
   return contextPromise;
 }
 
-async function resolveLabelId(teamId: string): Promise<string> {
+async function resolveLabelId(teamId: string, labelName: string): Promise<string> {
   const labelsData = await linearGraphql<{
     issueLabels: {
       nodes: Array<{ id: string; name: string; team: { id: string; key: string } | null }>;
@@ -167,7 +132,7 @@ async function resolveLabelId(teamId: string): Promise<string> {
         }
       }
     `,
-    { labelName: LINEAR_LABEL_NAME },
+    { labelName },
   );
 
   const existing = labelsData.issueLabels.nodes.find((l) => l.team?.id === teamId);
@@ -190,37 +155,35 @@ async function resolveLabelId(teamId: string): Promise<string> {
     {
       input: {
         teamId,
-        name: LINEAR_LABEL_NAME,
+        name: labelName,
       },
     },
   );
 
   if (!created.issueLabelCreate.success || !created.issueLabelCreate.issueLabel) {
-    throw new Error(`Failed to create Linear label: ${LINEAR_LABEL_NAME}`);
+    throw new Error(`Failed to create Linear label: ${labelName}`);
   }
 
   return created.issueLabelCreate.issueLabel.id;
 }
 
-export type PublicLinearIssue = {
-  identifier: string;
-  title: string;
-  url: string | null;
-  priority: number;
-  state: { name: string; type: string } | null;
-  updatedAt: string;
-};
+
 
 export async function createLinearIssue(input: {
   title: string;
   description: string;
   priority: LinearPriority;
+  labels: string[];
 }): Promise<{
   identifier: string;
   url: string | null;
   stateName: string | null;
 }> {
   const ctx = await resolveContext();
+
+  const labelIds = await Promise.all(
+    input.labels.map((name) => resolveLabelId(ctx.teamId, name)),
+  );
 
   const created = await linearGraphql<{
     issueCreate: {
@@ -253,7 +216,7 @@ export async function createLinearIssue(input: {
         title: input.title,
         description: input.description,
         priority: linearPriorityToNumber(input.priority),
-        labelIds: [ctx.labelId],
+        labelIds,
       },
     },
   );
@@ -269,42 +232,53 @@ export async function createLinearIssue(input: {
   };
 }
 
-export async function listLabelIssues(options?: { first?: number }): Promise<PublicLinearIssue[]> {
+export async function listIssues(
+  labels: string[],
+  options?: { first?: number },
+): Promise<PublicLinearIssue[]> {
   const ctx = await resolveContext();
   const first = Math.max(1, Math.min(options?.first ?? 50, 100));
 
+  // Construct filter for multiple labels (AND logic)
+  // We want issues that have Label A AND Label B.
+  // We cannot use 'in' operator on the label name because that would be an OR filter (has Label A OR Label B).
+  // Instead, we create a list of filters, one for each label, and combine them with 'and'.
+  const labelFilters = labels.map((label) => ({
+    labels: { name: { eq: label } },
+  }));
+
   const data = await linearGraphql<{
-    issueLabel: {
-      id: string;
-      name: string;
-      issues: { nodes: PublicLinearIssue[] };
+    issues: {
+      nodes: PublicLinearIssue[];
     } | null;
   }>(
     /* GraphQL */ `
-      query IssuesForLabel($labelId: String!, $first: Int!) {
-        issueLabel(id: $labelId) {
-          id
-          name
-          issues(first: $first, orderBy: updatedAt) {
-            nodes {
-              identifier
-              title
-              url
-              priority
-              updatedAt
-              state {
-                name
-                type
-              }
+      query IssuesList($first: Int!, $filter: IssueFilter) {
+        issues(first: $first, filter: $filter, orderBy: updatedAt) {
+          nodes {
+            identifier
+            title
+            url
+            priority
+            updatedAt
+            state {
+              name
+              type
             }
           }
         }
       }
     `,
-    { labelId: ctx.labelId, first },
+    {
+      first,
+      filter: {
+        team: { id: { eq: ctx.teamId } },
+        and: labelFilters,
+      },
+    },
   );
 
-  return data.issueLabel?.issues.nodes ?? [];
+  return data.issues?.nodes ?? [];
 }
 
 

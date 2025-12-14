@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { cn } from '@/lib/utils';
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -7,8 +7,9 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
 }
 
 export function Input({ label, error, className, id, ...props }: InputProps) {
-  const inputId = id || `input-${Math.random().toString(36).substr(2, 9)}`;
-  
+  const generatedId = useId();
+  const inputId = id || generatedId;
+
   return (
     <div className="w-full">
       {label && (
