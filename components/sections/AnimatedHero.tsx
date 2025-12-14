@@ -61,7 +61,7 @@ export function AnimatedHero() {
   const deviceInfo = useDeviceDetection();
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden bg-white pt-20">
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-white pt-40">
       <div className="container-content relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 

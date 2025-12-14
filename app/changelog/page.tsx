@@ -173,7 +173,7 @@ export default function ChangelogPage() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main>
-        <section className="pt-20 pb-12 bg-gradient-to-b from-gray-50 to-white">
+        <section className="pt-40 pb-12 bg-gradient-to-b from-gray-50 to-white">
           <div className="container-content">
             <div className="max-w-4xl mx-auto">
               {/* Back Button */}

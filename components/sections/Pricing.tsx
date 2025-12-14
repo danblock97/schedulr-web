@@ -20,7 +20,7 @@ const proFeatures = [
 
 export function Pricing() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="pt-40 pb-20 bg-gray-50">
       <div className="container-content">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900 font-heading">

@@ -39,13 +39,13 @@ function priorityPillClass(priority: number) {
 export default async function IssuesPage() {
   let issues:
     | Array<{
-        identifier: string;
-        title: string;
-        url: string | null;
-        priority: number;
-        updatedAt: string;
-        state: { name: string; type: string } | null;
-      }>
+      identifier: string;
+      title: string;
+      url: string | null;
+      priority: number;
+      updatedAt: string;
+      state: { name: string; type: string } | null;
+    }>
     | null = null;
   let loadError: string | null = null;
 
@@ -64,7 +64,7 @@ export default async function IssuesPage() {
     <div className="min-h-screen flex flex-col overflow-x-hidden">
       <Navbar />
       <main className="flex-1">
-        <section className="relative min-h-screen bg-gradient-to-b from-white via-indigo-50/30 to-white pt-28 pb-20">
+        <section className="relative min-h-screen bg-gradient-to-b from-white via-indigo-50/30 to-white pt-40 pb-20">
           <div className="container-content max-w-4xl">
             <div className="text-center mb-10">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 font-heading">Schedulr public issues</h1>

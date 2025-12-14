@@ -90,7 +90,7 @@ export default function SupportPage() {
     <div className="min-h-screen flex flex-col overflow-x-hidden">
       <Navbar />
       <main className="flex-1">
-        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-indigo-50/30 to-white pt-20 pb-20">
+        <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-b from-white via-indigo-50/30 to-white pt-40 pb-20">
           <AnimatedGradient />
           <OrbitalBackground />
 

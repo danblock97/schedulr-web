@@ -1,13 +1,13 @@
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
 import { Card } from '@/components/ui/Card';
-import { 
-  Users, 
-  Calendar, 
-  Sparkles, 
-  LayoutGrid, 
-  Palette, 
-  Bell 
+import {
+  Users,
+  Calendar,
+  Sparkles,
+  LayoutGrid,
+  Palette,
+  Bell
 } from 'lucide-react';
 import type { Metadata } from 'next';
 
@@ -128,7 +128,7 @@ export default function FeaturesPage() {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       <main>
-        <section className="pt-20 pb-12 bg-white">
+        <section className="pt-40 pb-12 bg-white">
           <div className="container-content">
             <div className="text-center mb-12">
               <h1 className="text-5xl md:text-6xl font-bold mb-4 text-gray-900">
@@ -149,9 +149,8 @@ export default function FeaturesPage() {
                 return (
                   <div
                     key={index}
-                    className={`flex flex-col ${
-                      index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                    } gap-12 items-center`}
+                    className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                      } gap-12 items-center`}
                   >
                     <div className="flex-1">
                       <div className="flex items-center space-x-4 mb-6">
@@ -163,7 +162,7 @@ export default function FeaturesPage() {
                       <p className="text-xl text-gray-800 mb-8">
                         {feature.description}
                       </p>
-                      
+
                       <div className="grid md:grid-cols-2 gap-8">
                         <div>
                           <h3 className="font-semibold text-lg mb-4 text-gray-900">Benefits</h3>
