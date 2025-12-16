@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { AnimatedGradient } from '@/components/ui/AnimatedGradient';
 import { OrbitalBackground } from '@/components/ui/OrbitalBackground';
 import { BugReportForm } from '@/components/linear/BugReportForm';
-import { IssuesList } from '@/components/linear/IssuesList';
+import { FeatureRequestForm } from '@/components/linear/FeatureRequestForm';
 import type { PublicLinearIssue } from '@/lib/linear-shared';
 
 interface Particle {
@@ -64,6 +64,7 @@ interface SupportPageContentProps {
 
 export default function SupportPageContent({ initialIssues, loadError }: SupportPageContentProps) {
     const [particles, setParticles] = useState<Particle[]>([]);
+    const [reportType, setReportType] = useState<'bug' | 'feature'>('bug');
 
     useEffect(() => {
         const generatedParticles: Particle[] = [];
@@ -183,39 +184,58 @@ export default function SupportPageContent({ initialIssues, loadError }: Support
                                 </motion.a>
                             </motion.div>
 
-                            {/* Divider */}
+                            {/* Divider & Toggle */}
                             <motion.div
                                 variants={itemVariants}
-                                className="flex items-center justify-center gap-4 mb-8"
+                                className="flex flex-col items-center justify-center gap-6 mb-10"
                             >
-                                <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent w-32"></div>
-                                <span className="text-sm text-gray-400 font-medium">or report a bug below</span>
-                                <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent w-32"></div>
+                                <div className="flex items-center gap-4 w-full justify-center">
+                                    <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent w-full max-w-[150px]"></div>
+                                    <span className="text-sm text-gray-400 font-medium whitespace-nowrap">or use the form below</span>
+                                    <div className="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent w-full max-w-[150px]"></div>
+                                </div>
+
+                                <div className="bg-gray-100/80 p-1.5 rounded-full inline-flex relative">
+                                    <div
+                                        className="absolute top-1.5 bottom-1.5 bg-white rounded-full shadow-sm transition-all duration-300 ease-out z-0"
+                                        style={{
+                                            left: reportType === 'bug' ? '6px' : '50%',
+                                            right: reportType === 'bug' ? '50%' : '6px',
+                                        }}
+                                    />
+                                    <button
+                                        onClick={() => setReportType('bug')}
+                                        className={`relative z-10 px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-200 ${reportType === 'bug' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700'
+                                            }`}
+                                    >
+                                        Report a Bug
+                                    </button>
+                                    <button
+                                        onClick={() => setReportType('feature')}
+                                        className={`relative z-10 px-6 py-2 rounded-full text-sm font-semibold transition-colors duration-200 ${reportType === 'feature' ? 'text-gray-900' : 'text-gray-500 hover:text-gray-700'
+                                            }`}
+                                    >
+                                        Request Feature
+                                    </button>
+                                </div>
                             </motion.div>
 
-                            {/* Bug report form */}
+                            {/* Form Area */}
                             <motion.div
                                 variants={itemVariants}
                                 className="w-full max-w-2xl mx-auto mb-16"
+                                key={reportType} // Re-mount when type changes for clean animation
+                                initial={{ opacity: 0, scale: 0.98 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.3 }}
                             >
-                                <BugReportForm />
-                            </motion.div>
-
-                            {/* Known Issues List */}
-                            <motion.div variants={itemVariants} className="w-full text-left">
-                                <div className="text-center mb-8">
-                                    <h2 className="text-2xl font-bold text-gray-900 font-heading">Known Bugs</h2>
-                                    <p className="text-gray-500 mt-1">
-                                        Live list of known issues (label: <span className="font-semibold">Schedulr, Bug</span>).
-                                    </p>
-                                </div>
-                                <IssuesList issues={initialIssues} loadError={loadError} />
+                                {reportType === 'bug' ? <BugReportForm /> : <FeatureRequestForm />}
                             </motion.div>
 
                             {/* Additional Info */}
                             <motion.div
                                 variants={itemVariants}
-                                className="mt-16 flex flex-wrap justify-center gap-8 text-center"
+                                className="mt-8 flex flex-wrap justify-center gap-8 text-center"
                             >
                                 {[
                                     { label: 'Response Time', value: '< 24 hours' },

@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { Menu, X, Smartphone, ChevronDown } from 'lucide-react';
+import { Menu, X, Smartphone } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/Button';
 import { useDeviceDetection } from '@/lib/useDeviceDetection';
@@ -11,20 +11,14 @@ const APP_STORE_URL = 'https://apps.apple.com/gb/app/schedulr/id6754965988';
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const deviceInfo = useDeviceDetection();
 
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/features', label: 'Features' },
     { href: '/pricing', label: 'Pricing' },
-    {
-      label: 'Support',
-      children: [
-        { href: '/support', label: 'Bug Reporting' },
-        { href: '/feature-requests', label: 'Feature Requests' },
-      ],
-    },
+    { href: '/support', label: 'Support' },
+    { href: '/issues', label: 'Issues' },
     { href: '/changelog', label: 'Changelog' },
   ];
 
@@ -46,49 +40,13 @@ export function Navbar() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center space-x-1 bg-gray-100/50 rounded-full px-1 py-1 flex-1 justify-center min-w-0 relative">
           {navLinks.map((link) => (
-            link.children ? (
-              <div
-                key={link.label}
-                className="relative group"
-                onMouseEnter={() => setActiveDropdown(link.label)}
-                onMouseLeave={() => setActiveDropdown(null)}
-              >
-                <button
-                  className="flex items-center gap-1 px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-white rounded-full transition-all duration-200"
-                >
-                  {link.label}
-                  <ChevronDown size={14} className={`transition-transform duration-200 ${activeDropdown === link.label ? 'rotate-180' : ''}`} />
-                </button>
-
-                {/* Dropdown Menu */}
-                <div
-                  className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 w-56 transform transition-all duration-200 origin-top ${activeDropdown === link.label
-                      ? 'opacity-100 scale-100 translate-y-0'
-                      : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
-                    }`}
-                >
-                  <div className="bg-white rounded-xl shadow-xl border border-gray-100 p-2 overflow-hidden">
-                    {link.children.map((child) => (
-                      <Link
-                        key={child.href}
-                        href={child.href}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-indigo-600 rounded-lg transition-colors text-left font-medium"
-                      >
-                        {child.label}
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href!}
-                className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-white rounded-full transition-all duration-200"
-              >
-                {link.label}
-              </Link>
-            )
+            <Link
+              key={link.href}
+              href={link.href!}
+              className="px-4 py-2 text-sm font-medium text-gray-600 hover:text-gray-900 hover:bg-white rounded-full transition-all duration-200"
+            >
+              {link.label}
+            </Link>
           ))}
         </div>
 
@@ -131,32 +89,14 @@ export function Navbar() {
       {mobileMenuOpen && (
         <div className="absolute top-full left-4 right-4 mt-2 p-4 bg-white rounded-2xl shadow-xl border border-gray-100 pointer-events-auto md:hidden flex flex-col space-y-2 animate-in slide-in-from-top-4 fade-in duration-200">
           {navLinks.map((link) => (
-            link.children ? (
-              <div key={link.label} className="space-y-1">
-                <div className="px-4 py-2 text-xs font-bold text-gray-400 uppercase tracking-wider">
-                  {link.label}
-                </div>
-                {link.children.map((child) => (
-                  <Link
-                    key={child.href}
-                    href={child.href}
-                    className="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl font-medium transition-colors ml-2"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    {child.label}
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <Link
-                key={link.href}
-                href={link.href!}
-                className="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl font-medium transition-colors"
-                onClick={() => setMobileMenuOpen(false)}
-              >
-                {link.label}
-              </Link>
-            )
+            <Link
+              key={link.href}
+              href={link.href!}
+              className="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl font-medium transition-colors"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              {link.label}
+            </Link>
           ))}
         </div>
       )}

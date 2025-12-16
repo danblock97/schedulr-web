@@ -3,10 +3,21 @@ export type LinearPriority = 'none' | 'urgent' | 'high' | 'medium' | 'low';
 export type PublicLinearIssue = {
     identifier: string;
     title: string;
+    description?: string;
     url: string | null;
     priority: number;
     state: { name: string; type: string } | null;
+    assignee?: { name: string; avatarUrl?: string } | null;
+    labels?: Array<{ name: string }>;
     updatedAt: string;
+};
+
+export type LinearWorkflowState = {
+    id: string;
+    name: string;
+    type: string;
+    color?: string;
+    position?: number;
 };
 
 export function linearPriorityToNumber(priority: LinearPriority): number {

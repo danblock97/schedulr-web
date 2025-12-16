@@ -65,7 +65,7 @@ function TurnstileWidget(props: { onToken: (token: string | null) => void }) {
     script.defer = true;
     script.addEventListener('load', render, { once: true });
     document.head.appendChild(script);
-  }, [props, siteKey]);
+  }, [props.onToken, siteKey, bypassInDev]);
 
   const reset = () => {
     props.onToken(bypassInDev ? 'dev-bypass' : null);

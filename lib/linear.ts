@@ -249,7 +249,17 @@ export async function listIssues(
 
   const data = await linearGraphql<{
     issues: {
-      nodes: PublicLinearIssue[];
+      nodes: Array<{
+        identifier: string;
+        title: string;
+        description: string;
+        url: string | null;
+        priority: number;
+        updatedAt: string;
+        state: { name: string; type: string };
+        assignee: { name: string; avatarUrl: string } | null;
+        labels: { nodes: Array<{ name: string }> };
+      }>;
     } | null;
   }>(
     /* GraphQL */ `
@@ -258,12 +268,22 @@ export async function listIssues(
           nodes {
             identifier
             title
+            description
             url
             priority
             updatedAt
             state {
               name
               type
+            }
+            assignee {
+              name
+              avatarUrl
+            }
+            labels {
+              nodes {
+                name
+              }
             }
           }
         }
@@ -278,7 +298,41 @@ export async function listIssues(
     },
   );
 
-  return data.issues?.nodes ?? [];
+  return (
+    data.issues?.nodes.map((n) => ({
+      ...n,
+      labels: n.labels.nodes,
+    })) ?? []
+  );
+}
+
+export async function getWorkflowStates(): Promise<
+  Array<{ id: string; name: string; type: string; color: string; position: number }>
+> {
+  const ctx = await resolveContext();
+
+  const data = await linearGraphql<{
+    workflowStates: {
+      nodes: Array<{ id: string; name: string; type: string; color: string; position: number }>;
+    };
+  }>(
+    /* GraphQL */ `
+      query WorkflowStates($teamId: ID!) {
+        workflowStates(filter: { team: { id: { eq: $teamId } } }) {
+          nodes {
+            id
+            name
+            type
+            color
+            position
+          }
+        }
+      }
+    `,
+    { teamId: ctx.teamId },
+  );
+
+  return data.workflowStates.nodes.sort((a, b) => a.position - b.position);
 }
 
 
