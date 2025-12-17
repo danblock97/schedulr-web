@@ -1,18 +1,21 @@
 import { PublicLinearIssue } from '@/lib/linear-shared';
 import { PriorityIcon } from './PriorityIcon';
 import { Card } from '@/components/ui/Card';
-import { User, Bug, Lightbulb } from 'lucide-react';
+import { User, Bug, Lightbulb, Laptop, Smartphone } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 interface IssueCardProps {
     issue: PublicLinearIssue;
+    onClick?: () => void;
 }
 
-export function IssueCard({ issue }: IssueCardProps) {
+export function IssueCard({ issue, onClick }: IssueCardProps) {
     const isBug = issue.labels?.some(l => l.name.toLowerCase().includes('bug'));
+    const isWeb = issue.labels?.some(l => l.name === 'Schedulr Web');
+    const isApp = issue.labels?.some(l => l.name === 'Schedulr App');
 
     return (
-        <Card hover={true} className="p-4 border border-gray-100 shadow-sm cursor-default hover:shadow-md transition-shadow duration-200 bg-white group h-full flex flex-col">
+        <Card hover={true} onClick={onClick} className="p-4 border border-gray-100 shadow-sm cursor-pointer hover:shadow-md transition-shadow duration-200 bg-white group h-full flex flex-col">
             <div className="flex justify-between items-start mb-2 gap-2">
                 <span className="text-xs font-mono text-gray-400 shrink-0">{issue.identifier}</span>
                 <div className="flex items-center gap-1.5 shrink-0">
@@ -48,12 +51,30 @@ export function IssueCard({ issue }: IssueCardProps) {
 
             <div className="mt-auto pt-3 flex items-center gap-2">
                 <span className={`inline-flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-[4px] border ${isBug
-                        ? 'bg-rose-50 text-rose-700 border-rose-100'
-                        : 'bg-emerald-50 text-emerald-700 border-emerald-100'
+                    ? 'bg-rose-50 text-rose-700 border-rose-100'
+                    : 'bg-emerald-50 text-emerald-700 border-emerald-100'
                     }`}>
                     {isBug ? <Bug className="w-3 h-3" /> : <Lightbulb className="w-3 h-3" />}
                     {isBug ? 'Bug' : 'Feature'}
                 </span>
+                {isWeb && (
+                    <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-[4px] border bg-sky-50 text-sky-700 border-sky-100">
+                        <Laptop className="w-3 h-3" />
+                        Web
+                    </span>
+                )}
+                {isApp && (
+                    <span className="inline-flex items-center gap-1 text-[10px] uppercase tracking-wider font-semibold px-2 py-1 rounded-[4px] border bg-purple-50 text-purple-700 border-purple-100">
+                        <Smartphone className="w-3 h-3" />
+                        App
+                    </span>
+                )}
+            </div>
+
+            <div className="px-4 pb-3 pt-0 mt-auto">
+                <p className="text-[10px] text-gray-400 font-medium">
+                    Updated {new Date(issue.updatedAt).toLocaleDateString('en-GB')}
+                </p>
             </div>
         </Card>
     );

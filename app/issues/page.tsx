@@ -2,6 +2,8 @@ import { Navbar } from '@/components/layout/Navbar';
 import { KanbanBoard } from '@/components/linear/KanbanBoard';
 import { getWorkflowStates, listIssues } from '@/lib/linear';
 import { Metadata } from 'next';
+import { Button } from '@/components/ui/Button';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
     title: 'Issues - Schedulr',
@@ -18,18 +20,38 @@ export default async function IssuesPage() {
     try {
         // Fetch issues and workflow states in parallel
         // We fetch bugs and features separately because listIssues uses AND logic for labels
-        const [bugs, features, fetchedStates] = await Promise.all([
+        const [appBugs, appFeatures, webBugs, webFeatures, fetchedStates] = await Promise.all([
             listIssues(['Schedulr App', 'Bug'], { first: 50 }),
             listIssues(['Schedulr App', 'Feature'], { first: 50 }),
+            listIssues(['Schedulr Web', 'Bug'], { first: 50 }),
+            listIssues(['Schedulr Web', 'Feature'], { first: 50 }),
             getWorkflowStates()
         ]);
 
         // Merge and deduplicate by identifier
-        const allIssues = [...bugs, ...features];
+        const allIssues = [...appBugs, ...appFeatures, ...webBugs, ...webFeatures];
         const uniqueIssues = Array.from(new Map(allIssues.map(item => [item.identifier, item])).values());
 
+        // Custom sort order for workflow states
+        const stateOrder = ['Backlog', 'Todo', 'In Progress', 'In Review', 'Done', 'Canceled'];
+
+        // Create a map for O(1) lookups of state priority
+        const statePriority = new Map(stateOrder.map((name, index) => [name.toLowerCase(), index]));
+
+        // Sort states based on the defined order
+        const sortedStates = [...fetchedStates].sort((a, b) => {
+            const indexA = statePriority.get(a.name.toLowerCase()) ?? 999;
+            const indexB = statePriority.get(b.name.toLowerCase()) ?? 999;
+
+            if (indexA !== indexB) {
+                return indexA - indexB;
+            }
+            // Fallback to original position if names don't match (though they should)
+            return a.position - b.position;
+        });
+
         issues = uniqueIssues;
-        workflowStates = fetchedStates;
+        workflowStates = sortedStates;
     } catch (err) {
         console.error('Failed to load data for /issues', err);
         loadError = 'Failed to load issues board. Please try again later.';
@@ -54,10 +76,19 @@ export default async function IssuesPage() {
             <Navbar />
             <div className="flex-1 flex flex-col min-h-0 pt-40">
                 <div className="px-6 md:px-8 mb-6 flex-shrink-0">
-                    <h1 className="text-3xl font-bold text-gray-900 font-heading">Public Roadmap</h1>
-                    <p className="text-gray-500 mt-2 max-w-2xl">
-                        See what we're building, what's coming next, and the status of known issues.
-                    </p>
+                    <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div>
+                            <h1 className="text-3xl font-bold text-gray-900 font-heading">Public Roadmap</h1>
+                            <p className="text-gray-500 mt-2 max-w-2xl">
+                                See what we&apos;re building, what&apos;s coming next, and the status of known issues.
+                            </p>
+                        </div>
+                        <Link href="/support">
+                            <Button variant="secondary" size="sm" className="hidden md:inline-flex">
+                                Report an Issue
+                            </Button>
+                        </Link>
+                    </div>
 
                     {loadError && (
                         <div className="mt-4 p-4 bg-red-50 text-red-700 rounded-lg border border-red-100 text-sm">
