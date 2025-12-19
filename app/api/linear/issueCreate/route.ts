@@ -8,7 +8,8 @@ type CreateIssueBody = {
   description?: unknown;
   priority?: unknown;
   turnstileToken?: unknown;
-  type?: unknown;
+  type: unknown;
+  platform?: unknown;
 };
 
 function isNonEmptyString(v: unknown): v is string {
@@ -39,6 +40,7 @@ export async function POST(req: Request) {
   const priority = normalizePriority(body.priority);
   const turnstileToken = isNonEmptyString(body.turnstileToken) ? body.turnstileToken.trim() : '';
   const type = isNonEmptyString(body.type) ? body.type.trim().toLowerCase() : 'bug';
+  const platform = isNonEmptyString(body.platform) ? body.platform.trim().toLowerCase() : 'app';
 
   if (title.length < 3 || title.length > 120) {
     return NextResponse.json({ error: 'Title must be between 3 and 120 characters' }, { status: 400 });
@@ -59,7 +61,7 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: 'Spam check failed' }, { status: 400 });
   }
 
-  const labels = ['Schedulr App'];
+  const labels = [platform === 'web' ? 'Schedulr Web' : 'Schedulr App'];
   if (type === 'feature') {
     labels.push('Feature');
   } else {

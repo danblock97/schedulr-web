@@ -104,6 +104,7 @@ export function FeatureRequestForm() {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [priority, setPriority] = useState<PriorityOption>('none');
+    const [platform, setPlatform] = useState<'app' | 'web'>('app');
     const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
     const [submitting, setSubmitting] = useState(false);
@@ -140,6 +141,7 @@ export function FeatureRequestForm() {
                     title,
                     description,
                     priority,
+                    platform,
                     turnstileToken,
                     type: 'feature',
                 }),
@@ -163,6 +165,7 @@ export function FeatureRequestForm() {
             setTitle('');
             setDescription('');
             setPriority('none');
+            setPlatform('app');
             setTurnstileToken(null);
             window.dispatchEvent(new Event('turnstile-reset'));
         } catch {
@@ -232,12 +235,37 @@ export function FeatureRequestForm() {
                             <div>
                                 <h2 className="text-xl md:text-2xl font-bold text-gray-900 font-heading">Request a feature</h2>
                                 <p className="text-sm md:text-base text-gray-600 mt-1">
-                                    This goes straight into our backlog (label: <span className="font-semibold">Schedulr, Feature</span>).
+                                    This goes straight into our backlog.
                                 </p>
                             </div>
                         </div>
 
                         <form onSubmit={onSubmit} className="mt-6 space-y-5">
+                            <div className="w-full">
+                                <label className="block text-sm font-medium text-gray-700 mb-3">Platform</label>
+                                <div className="grid grid-cols-2 gap-3">
+                                    <button
+                                        type="button"
+                                        onClick={() => setPlatform('app')}
+                                        className={`px-4 py-3 rounded-xl border-2 text-sm font-semibold transition-all duration-200 ${platform === 'app'
+                                            ? 'border-indigo-600 bg-indigo-50 text-indigo-700 shadow-sm shadow-indigo-100'
+                                            : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'
+                                            }`}
+                                    >
+                                        Schedulr App
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => setPlatform('web')}
+                                        className={`px-4 py-3 rounded-xl border-2 text-sm font-semibold transition-all duration-200 ${platform === 'web'
+                                            ? 'border-indigo-600 bg-indigo-50 text-indigo-700 shadow-sm shadow-indigo-100'
+                                            : 'border-gray-200 bg-white text-gray-500 hover:border-gray-300'
+                                            }`}
+                                    >
+                                        Schedulr Web
+                                    </button>
+                                </div>
+                            </div>
                             <Input
                                 label="Feature title"
                                 placeholder="E.g. Dark mode support"

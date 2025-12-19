@@ -63,15 +63,15 @@ export function Navbar() {
               <span className="hidden sm:inline">Download</span>
             </a>
           ) : (
-            <Button
-              variant="primary"
-              size="sm"
-              disabled
-              className="opacity-50 cursor-not-allowed bg-gray-200 text-gray-500"
-              title="iOS Only"
+            <a
+              href={APP_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-bold bg-indigo-50 text-indigo-600 hover:bg-indigo-100 transition-all duration-300 border border-indigo-100"
+              title="iOS Only - View on App Store"
             >
               iOS Only
-            </Button>
+            </a>
           )}
 
           {/* Mobile Menu Button */}
