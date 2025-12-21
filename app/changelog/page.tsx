@@ -12,6 +12,18 @@ export const metadata: Metadata = {
 
 const versions = [
   {
+    version: '1.6.4',
+    displayDate: 'Dec 21, 2025',
+    title: 'Feedback and Support Enhancements',
+    summary: 'We\'ve introduced a dedicated feedback and support section in the user profile and resolved dashboard visibility issues.',
+    improvements: [
+      'Implemented feedback and support section in users profile page which includes link to view tracked issues',
+    ],
+    fixes: [
+      'Fixed an issue where chat bubbles on dashboard were underlapping the notification bell and became hard to read',
+    ],
+  },
+  {
     version: '1.6.3',
     displayDate: 'Dec 20, 2025',
     title: 'AI Suggestions and Liquid Glass Support',
