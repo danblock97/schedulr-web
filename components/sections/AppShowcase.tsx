@@ -26,22 +26,28 @@ const screenshots = [
     description: 'Ask in natural language to find meeting times',
   },
   {
-    src: '/images/app-screenshots/iphone-scheduly-ai-2.png',
-    alt: 'Scheduly AI Conversation',
-    title: 'AI Conversations',
-    description: 'Intelligent scheduling made simple',
-  },
-  {
-    src: '/images/app-screenshots/iphone-invite.png',
-    alt: 'Group Invites',
-    title: 'Easy Invites',
-    description: 'Share invite codes with your group',
-  },
-  {
     src: '/images/app-screenshots/iphone-profile-view.png',
     alt: 'Profile View',
     title: 'Profile & Settings',
     description: 'Manage your account and preferences',
+  },
+  {
+    src: '/images/app-screenshots/large-widget.png',
+    alt: 'Large Widget',
+    title: 'Large Widget',
+    description: 'Stay updated with the large widget',
+  },
+  {
+    src: '/images/app-screenshots/medium-widget.png',
+    alt: 'Medium Widget',
+    title: 'Medium Widget',
+    description: 'Quick access with the medium widget',
+  },
+  {
+    src: '/images/app-screenshots/small-widget.png',
+    alt: 'Small Widget',
+    title: 'Small Widget',
+    description: 'Minimalist view with the small widget',
   },
 ];
 
