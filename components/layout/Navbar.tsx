@@ -25,6 +25,117 @@ export function Navbar() {
   return (
     <div className="fixed top-16 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <nav className="floating-nav rounded-full px-2 py-2 pointer-events-auto w-full max-w-5xl mx-auto flex items-center justify-between gap-3 relative">
+        {/* Christmas Hat - Left Corner */}
+        <div className="absolute left-0 -top-8 pointer-events-none transform -rotate-12 z-10">
+          <svg width="50" height="50" viewBox="0 0 100 100" className="drop-shadow-lg">
+            <defs>
+              <linearGradient id="hatGradientLeft" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ff4444" />
+                <stop offset="50%" stopColor="#dc2626" />
+                <stop offset="100%" stopColor="#b91c1c" />
+              </linearGradient>
+              <filter id="shadowLeft">
+                <feDropShadow dx="2" dy="3" stdDeviation="3" floodOpacity="0.4" />
+              </filter>
+            </defs>
+            {/* Main hat cone */}
+            <path
+              d="M 50 8 L 22 68 L 22 78 L 78 78 L 78 68 Z"
+              fill="url(#hatGradientLeft)"
+              filter="url(#shadowLeft)"
+            />
+            {/* Highlight on hat */}
+            <path
+              d="M 50 8 L 35 50 L 50 50 Z"
+              fill="#ff6b6b"
+              opacity="0.5"
+            />
+            {/* White fluffy trim */}
+            <ellipse
+              cx="50"
+              cy="73"
+              rx="28"
+              ry="12"
+              fill="#ffffff"
+              filter="url(#shadowLeft)"
+            />
+            {/* Trim texture lines */}
+            <path
+              d="M 22 73 Q 30 68, 38 73 T 54 73 T 70 73 T 78 73"
+              stroke="#e5e7eb"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <path
+              d="M 22 78 Q 30 73, 38 78 T 54 78 T 70 78 T 78 78"
+              stroke="#e5e7eb"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            {/* Pom pom */}
+            <circle cx="50" cy="8" r="8" fill="#ffffff" filter="url(#shadowLeft)" />
+            <circle cx="50" cy="8" r="6" fill="#fef3c7" />
+            <circle cx="48" cy="6" r="3" fill="#ffffff" opacity="0.9" />
+            <circle cx="52" cy="10" r="2.5" fill="#ffffff" opacity="0.7" />
+            <circle cx="50" cy="8" r="2" fill="#fbbf24" />
+          </svg>
+        </div>
+
+        {/* Christmas Hat - Right Corner */}
+        <div className="absolute right-0 -top-8 pointer-events-none transform rotate-12 z-10">
+          <svg width="50" height="50" viewBox="0 0 100 100" className="drop-shadow-lg">
+            <defs>
+              <linearGradient id="hatGradientRight" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#ff4444" />
+                <stop offset="50%" stopColor="#dc2626" />
+                <stop offset="100%" stopColor="#b91c1c" />
+              </linearGradient>
+              <filter id="shadowRight">
+                <feDropShadow dx="2" dy="3" stdDeviation="3" floodOpacity="0.4" />
+              </filter>
+            </defs>
+            {/* Main hat cone */}
+            <path
+              d="M 50 8 L 22 68 L 22 78 L 78 78 L 78 68 Z"
+              fill="url(#hatGradientRight)"
+              filter="url(#shadowRight)"
+            />
+            {/* Highlight on hat */}
+            <path
+              d="M 50 8 L 35 50 L 50 50 Z"
+              fill="#ff6b6b"
+              opacity="0.5"
+            />
+            {/* White fluffy trim */}
+            <ellipse
+              cx="50"
+              cy="73"
+              rx="28"
+              ry="12"
+              fill="#ffffff"
+              filter="url(#shadowRight)"
+            />
+            {/* Trim texture lines */}
+            <path
+              d="M 22 73 Q 30 68, 38 73 T 54 73 T 70 73 T 78 73"
+              stroke="#e5e7eb"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            <path
+              d="M 22 78 Q 30 73, 38 78 T 54 78 T 70 78 T 78 78"
+              stroke="#e5e7eb"
+              strokeWidth="1.5"
+              fill="none"
+            />
+            {/* Pom pom */}
+            <circle cx="50" cy="8" r="8" fill="#ffffff" filter="url(#shadowRight)" />
+            <circle cx="50" cy="8" r="6" fill="#fef3c7" />
+            <circle cx="48" cy="6" r="3" fill="#ffffff" opacity="0.9" />
+            <circle cx="52" cy="10" r="2.5" fill="#ffffff" opacity="0.7" />
+            <circle cx="50" cy="8" r="2" fill="#fbbf24" />
+          </svg>
+        </div>
         {/* Logo */}
         <Link href="/" className="flex items-center space-x-2 px-4 shrink-0">
           <Image

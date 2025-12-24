@@ -3,6 +3,8 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import FairyLights from "@/components/ui/FairyLights";
+import ChristmasTree from "@/components/ui/ChristmasTree";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -61,6 +63,8 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${outfit.variable} font-sans antialiased`}>
+        <FairyLights />
+        <ChristmasTree />
         {/* 
         <div
           className="sticky top-0 z-50 w-full bg-amber-100 border-b border-amber-200 text-amber-900 text-center px-4 py-3 text-sm"
