@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { Twitter } from 'lucide-react';
 
 export function Footer() {
   const navLinks = [
@@ -77,12 +78,23 @@ export function Footer() {
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} Schedulr. All rights reserved.
           </p>
-          <a
-            href="mailto:support@schedulr.co.uk"
-            className="text-gray-500 hover:text-primary transition-colors text-sm mt-4 md:mt-0"
-          >
-            support@schedulr.co.uk
-          </a>
+          <div className="flex items-center gap-6 mt-4 md:mt-0">
+            <a
+              href="mailto:support@schedulr.co.uk"
+              className="text-gray-500 hover:text-primary transition-colors text-sm"
+            >
+              support@schedulr.co.uk
+            </a>
+            <a
+              href="https://x.com/schedulrai"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-500 hover:text-gray-900 transition-colors"
+              aria-label="Follow us on X"
+            >
+              <Twitter className="w-5 h-5" />
+            </a>
+          </div>
         </div>
       </div>
     </footer>
