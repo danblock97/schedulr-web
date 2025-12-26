@@ -144,6 +144,7 @@ export function Navbar() {
             width={32}
             height={32}
             className="rounded-lg"
+            sizes="32px"
           />
           <span className="text-lg font-bold text-gray-900 font-heading whitespace-nowrap">Schedulr</span>
         </Link>

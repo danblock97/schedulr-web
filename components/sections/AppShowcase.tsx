@@ -212,6 +212,7 @@ export function AppShowcase() {
                           fill
                           className="object-cover"
                           priority={currentIndex < 2}
+                          sizes="(max-width: 768px) 280px, 350px"
                         />
                       </div>
                     </div>
@@ -276,6 +277,8 @@ export function AppShowcase() {
                   alt={screenshot.alt}
                   fill
                   className="object-cover"
+                  sizes="(max-width: 768px) 64px, 80px"
+                  loading="lazy"
                 />
                 {index === currentIndex && (
                   <motion.div

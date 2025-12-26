@@ -30,6 +30,7 @@ export function Footer() {
                 width={32}
                 height={32}
                 className="rounded-lg"
+                sizes="32px"
               />
               <span className="text-xl font-bold gradient-brand-text font-heading">Schedulr</span>
             </Link>

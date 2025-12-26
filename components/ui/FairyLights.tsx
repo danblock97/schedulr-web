@@ -1,34 +1,35 @@
 "use client";
 
-import { useEffect, useState } from "react";
+// Pre-calculate light positions (deterministic based on index)
+const LIGHT_COUNT = 50;
+const colors = ["#ef4444", "#f59e0b", "#10b981", "#3b82f6", "#8b5cf6", "#ec4899"];
+
+function generateLightPositions() {
+  return Array.from({ length: LIGHT_COUNT }, (_, i) => {
+    const x = (i / (LIGHT_COUNT - 1)) * 100;
+    const y = 32 + Math.sin(i * 0.3) * 8;
+    const color = colors[i % colors.length];
+    // Stagger animation delays for natural blinking effect
+    const delay = (i * 0.1) % 2; // Delay between 0-2 seconds
+    return { x, y, color, delay };
+  });
+}
+
+const lightPositions = generateLightPositions();
+
+// Generate wire path
+function generateWirePath() {
+  return `M 0,32 ${lightPositions.map((pos) => `L ${pos.x}%,${pos.y}`).join(" ")}`;
+}
 
 export default function FairyLights() {
-  const [lights, setLights] = useState<boolean[]>([]);
-
-  useEffect(() => {
-    // Create array of 50 lights
-    const initialLights = Array.from({ length: 50 }, () => Math.random() > 0.5);
-    setLights(initialLights);
-
-    // Animate lights with random blinking
-    const interval = setInterval(() => {
-      setLights((prev) => prev.map(() => Math.random() > 0.3));
-    }, 500);
-
-    return () => clearInterval(interval);
-  }, []);
-
   return (
     <div className="fixed top-0 left-0 right-0 h-16 z-40 pointer-events-none overflow-hidden">
       <div className="relative w-full h-full">
         {/* Wire */}
         <svg className="absolute top-0 left-0 w-full h-full" style={{ height: "64px" }}>
           <path
-            d={`M 0,32 ${Array.from({ length: 50 }, (_, i) => {
-              const x = (i / 49) * 100;
-              const y = 32 + Math.sin(i * 0.3) * 8;
-              return `L ${x}%,${y}`;
-            }).join(" ")}`}
+            d={generateWirePath()}
             stroke="#d4a574"
             strokeWidth="2"
             fill="none"
@@ -37,38 +38,26 @@ export default function FairyLights() {
         </svg>
 
         {/* Lights */}
-        {lights.map((isOn, i) => {
-          const x = (i / 49) * 100;
-          const y = 32 + Math.sin(i * 0.3) * 8;
-          const colors = ["#ef4444", "#f59e0b", "#10b981", "#3b82f6", "#8b5cf6", "#ec4899"];
-          const color = colors[i % colors.length];
-
-          return (
+        {lightPositions.map((light, i) => (
+          <div
+            key={i}
+            className="fairy-light absolute"
+            style={{
+              left: `${light.x}%`,
+              top: `${light.y}px`,
+              animationDelay: `${light.delay}s`,
+            }}
+          >
             <div
-              key={i}
-              className="absolute"
+              className="w-3 h-3 rounded-full"
               style={{
-                left: `${x}%`,
-                top: `${y}px`,
-                transform: "translate(-50%, -50%)",
+                backgroundColor: light.color,
+                boxShadow: `0 0 8px ${light.color}, 0 0 12px ${light.color}, 0 0 16px ${light.color}`,
               }}
-            >
-              <div
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  isOn ? "opacity-100" : "opacity-30"
-                }`}
-                style={{
-                  backgroundColor: color,
-                  boxShadow: isOn
-                    ? `0 0 8px ${color}, 0 0 12px ${color}, 0 0 16px ${color}`
-                    : "none",
-                }}
-              />
-            </div>
-          );
-        })}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );
 }
-

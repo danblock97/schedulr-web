@@ -163,3 +163,20 @@ h6 {
 .text-balance {
   text-wrap: balance;
 }
+
+/* Fairy Lights Animation */
+@keyframes fairy-light-blink {
+  0%, 100% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(0.9);
+  }
+}
+
+.fairy-light {
+  animation: fairy-light-blink 2s ease-in-out infinite;
+  will-change: opacity, transform;
+}

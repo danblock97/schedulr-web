@@ -29,6 +29,23 @@ const homeFAQ = [
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col overflow-x-hidden">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: homeFAQ.map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: {
+                "@type": "Answer",
+                text: faq.answer,
+              },
+            })),
+          }),
+        }}
+      />
       <Navbar />
       <main>
         <AnimatedHero />
