@@ -2,7 +2,7 @@
 
 import { Navbar } from '@/components/layout/Navbar';
 import { Footer } from '@/components/layout/Footer';
-import { Mail, MessageCircle } from 'lucide-react';
+import { Mail, MessageCircle, Twitter } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
 import { AnimatedGradient } from '@/components/ui/AnimatedGradient';
@@ -168,10 +168,10 @@ export default function SupportPageContent({ initialIssues, loadError }: Support
                                 Have a question? Drop us a line and we'll get back to you within 24 hours.
                             </motion.p>
 
-                            {/* Email Button */}
+                            {/* Contact Buttons */}
                             <motion.div
                                 variants={itemVariants}
-                                className="mb-8"
+                                className="mb-8 flex flex-col sm:flex-row items-center justify-center gap-4"
                             >
                                 <motion.a
                                     href="mailto:support@schedulr.co.uk"
@@ -181,6 +181,17 @@ export default function SupportPageContent({ initialIssues, loadError }: Support
                                 >
                                     <MessageCircle className="w-5 h-5" />
                                     Email support@schedulr.co.uk
+                                </motion.a>
+                                <motion.a
+                                    href="https://x.com/schedulrai"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                    className="inline-flex items-center gap-2 justify-center rounded-full px-8 py-4 text-lg font-bold min-h-[52px] bg-gray-900 text-white shadow-lg shadow-gray-200 hover:shadow-xl hover:shadow-gray-300 transition-all duration-300"
+                                >
+                                    <Twitter className="w-5 h-5" />
+                                    Follow us on X
                                 </motion.a>
                             </motion.div>
 
@@ -239,7 +250,7 @@ export default function SupportPageContent({ initialIssues, loadError }: Support
                             >
                                 {[
                                     { label: 'Response Time', value: '< 24 hours' },
-                                    { label: 'Support Type', value: 'Email & Feedback Form' },
+                                    { label: 'Support Type', value: 'Email, X & Feedback Form' },
                                 ].map((stat, index) => (
                                     <motion.div
                                         key={index}
