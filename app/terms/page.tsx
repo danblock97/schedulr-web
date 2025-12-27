@@ -84,6 +84,34 @@ export default function TermsPage() {
                 For users in the European Economic Area (EEA) and United Kingdom, we comply with GDPR requirements as detailed in our Privacy Policy.
               </p>
 
+              <h3 className="text-xl font-semibold mt-6 mb-3">6.1. Automated Data Cleanup and Retention</h3>
+              <p className="text-gray-700 mb-4">
+                To maintain service performance and efficiency, Schedulr automatically removes certain data from our database according to our retention policies. This automated cleanup process is essential for maintaining optimal app performance and reducing storage costs.
+              </p>
+              <p className="text-gray-700 mb-4">
+                <strong>Important:</strong> This automated cleanup only affects data stored in our database. Your Apple Calendar data on your device is never affected. Events remain in your Apple Calendar regardless of our database cleanup.
+              </p>
+              <p className="text-gray-700 mb-4">
+                The following data may be automatically deleted:
+              </p>
+              <ul className="list-disc pl-6 mb-4 text-gray-700 space-y-2">
+                <li><strong>Calendar Events:</strong> Events with an end date older than 90 days are automatically deleted from our database</li>
+                <li><strong>AI Usage Records:</strong> Monthly usage tracking records older than 6 months are automatically deleted</li>
+                <li><strong>AI Conversations:</strong> Chat conversations inactive for 6 months are automatically deleted</li>
+              </ul>
+              <p className="text-gray-700 mb-4">
+                This automated cleanup:
+              </p>
+              <ul className="list-disc pl-6 mb-4 text-gray-700 space-y-2">
+                <li>Runs periodically without requiring user action</li>
+                <li>Is permanent and cannot be undone</li>
+                <li>Does not require advance notification (routine maintenance process)</li>
+                <li>Does not affect your Apple Calendar data on your device</li>
+              </ul>
+              <p className="text-gray-700 mb-6">
+                By using Schedulr, you acknowledge and agree that data may be automatically deleted according to these retention policies. We are not liable for any data loss resulting from automated cleanup processes, as this is a standard maintenance procedure disclosed in our Privacy Policy. If you need to preserve specific data, we recommend exporting it or ensuring it remains in your Apple Calendar, which is not affected by our cleanup processes.
+              </p>
+
               <h2 className="text-2xl font-bold mt-8 mb-4">7. Intellectual Property</h2>
               <p className="text-gray-700 mb-6">
                 All content, features, and functionality of Schedulr are owned by us and are protected by international copyright, trademark, and other intellectual property laws. You may not copy, modify, or create derivative works of our service without permission.

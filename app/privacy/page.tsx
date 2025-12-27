@@ -208,6 +208,46 @@ export default function PrivacyPage() {
                 Upon account deletion, all data is permanently removed within 30 days, except where retention is required by law.
               </p>
 
+              <h3 className="text-xl font-semibold mt-6 mb-3">8.1. Automated Database Cleanup</h3>
+              <p className="text-gray-700 mb-4">
+                To maintain database performance and reduce storage costs, Schedulr includes an automated database cleanup system that periodically removes old data. This process is automatic and does not require any action from you.
+              </p>
+              <p className="text-gray-700 mb-4">
+                <strong>Important:</strong> This automated cleanup only affects data stored in our database. Your Apple Calendar data on your device is never affected by this process. Events remain in your Apple Calendar regardless of our database cleanup.
+              </p>
+              
+              <h4 className="text-lg font-semibold mt-4 mb-2">Calendar Events</h4>
+              <p className="text-gray-700 mb-4">
+                Calendar events with an end date older than <strong>90 days</strong> are automatically deleted from our database. This helps maintain optimal app performance and reduces storage costs. Please note:
+              </p>
+              <ul className="list-disc pl-6 mb-4 text-gray-700 space-y-2">
+                <li>Only events stored in our database are affected—your Apple Calendar events remain untouched</li>
+                <li>If you need to access older events, you can re-sync from your Apple Calendar (events within the last 14 days will be re-uploaded)</li>
+                <li>This deletion is permanent and cannot be undone</li>
+              </ul>
+
+              <h4 className="text-lg font-semibold mt-4 mb-2">AI Usage Records</h4>
+              <p className="text-gray-700 mb-4">
+                Monthly AI usage tracking records older than <strong>6 months</strong> are automatically deleted. This historical usage data is used for billing and usage limit tracking. Deletion of old records does not affect your current subscription or usage limits.
+              </p>
+
+              <h4 className="text-lg font-semibold mt-4 mb-2">AI Conversation History</h4>
+              <p className="text-gray-700 mb-4">
+                AI chat conversations that haven't been updated or accessed in <strong>6 months</strong> are automatically deleted, including all messages within those conversations. This helps maintain database performance and ensures we only retain active, relevant conversation data.
+              </p>
+
+              <h4 className="text-lg font-semibold mt-4 mb-2">Subscription Grace Period Enforcement</h4>
+              <p className="text-gray-700 mb-4">
+                When you downgrade from Pro to Free tier, you receive a 7-day grace period to adjust your usage. After the grace period expires, the system automatically enforces free tier limits by removing excess groups or members as necessary. This is an automated process that ensures compliance with your subscription tier.
+              </p>
+
+              <p className="text-gray-700 mb-6">
+                <strong>Cleanup Process:</strong> The cleanup runs periodically via automated processes. Data deletion is permanent and cannot be recovered. We do not provide advance notification before cleanup occurs, as this is a routine maintenance process designed to keep the service running efficiently.
+              </p>
+              <p className="text-gray-700 mb-6">
+                If you have concerns about data retention or wish to export your data before cleanup occurs, please contact us at <a href="mailto:support@schedulr.co.uk" className="text-[#FA4A8C] hover:text-[#945AE0]">support@schedulr.co.uk</a>. We recommend regularly syncing important events from your Apple Calendar if you need to maintain access to older events.
+              </p>
+
               <h2 className="text-2xl font-bold mt-8 mb-4">9. Children's Privacy</h2>
               <p className="text-gray-700 mb-6">
                 Schedulr is not intended for children under 13 years of age. We do not knowingly collect personal information from children under 13. If you believe we have collected information from a child under 13, please contact us immediately.
