@@ -71,7 +71,7 @@ export function IssueCard({ issue, onClick }: IssueCardProps) {
                 )}
             </div>
 
-            <div className="px-4 pb-3 pt-0 mt-auto">
+            <div className="pt-3 mt-2">
                 <p className="text-[10px] text-gray-400 font-medium">
                     Updated {new Date(issue.updatedAt).toLocaleDateString('en-GB')}
                 </p>
