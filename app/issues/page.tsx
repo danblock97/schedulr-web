@@ -72,10 +72,10 @@ export default async function IssuesPage() {
     }
 
     return (
-        <div className="h-screen flex flex-col overflow-hidden bg-gray-50">
+        <div className="min-h-screen flex flex-col bg-gray-50">
             <Navbar />
-            <div className="flex-1 flex flex-col min-h-0 pt-40">
-                <div className="px-6 md:px-8 mb-6 flex-shrink-0">
+            <div className="flex flex-col pt-40 pb-8">
+                <div className="px-6 md:px-8 mb-6">
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900 font-heading">Public Roadmap</h1>
@@ -98,7 +98,7 @@ export default async function IssuesPage() {
                 </div>
 
                 {/* Board Area */}
-                <div className="flex-1 overflow-hidden min-h-0">
+                <div>
                     <KanbanBoard issues={issues || []} workflowStates={workflowStates} />
                 </div>
             </div>

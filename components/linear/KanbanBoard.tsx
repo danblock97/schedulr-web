@@ -56,9 +56,9 @@ export function KanbanBoard({ issues, workflowStates }: KanbanBoardProps) {
     }, {} as Record<string, PublicLinearIssue[]>);
 
     return (
-        <div className="flex flex-col h-[calc(100vh-140px)]">
+        <div className="flex flex-col">
             {/* Filters Toolbar */}
-            <div className="px-6 pb-4 flex flex-col md:flex-row gap-4 items-center justify-between shrink-0">
+            <div className="px-6 pb-4 flex flex-col md:flex-row gap-4 items-center justify-between">
                 <div className="w-full md:w-96">
                     <div className="relative">
                         <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -121,13 +121,13 @@ export function KanbanBoard({ issues, workflowStates }: KanbanBoardProps) {
                 </div>
             </div>
 
-            <div className="flex flex-1 overflow-x-auto gap-4 pb-4 px-4 snap-x snap-mandatory md:snap-none min-h-0">
+            <div className="flex overflow-x-auto gap-4 pb-4 px-4 snap-x snap-mandatory md:snap-none">
                 {workflowStates.map((state) => {
                     const stateIssues = issuesByState[state.name] || [];
 
                     return (
-                        <div key={state.id} className="flex-shrink-0 w-[320px] flex flex-col snap-center h-full">
-                            <div className="flex items-center justify-between mb-4 sticky top-0 bg-transparent px-1">
+                        <div key={state.id} className="flex-shrink-0 w-[320px] flex flex-col snap-center">
+                            <div className="flex items-center justify-between mb-4 px-1">
                                 <div className="flex items-center gap-2">
                                     <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: state.color || '#e5e7eb' }} />
                                     <h3 className="font-semibold text-gray-900 text-sm tracking-wide">{state.name}</h3>
@@ -137,7 +137,7 @@ export function KanbanBoard({ issues, workflowStates }: KanbanBoardProps) {
                                 </div>
                             </div>
 
-                            <div className="flex-1 overflow-y-auto pr-2 pb-10 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
+                            <div className="pr-2">
                                 <div className="space-y-3">
                                     {stateIssues.map(issue => (
                                         <div key={issue.identifier} onClick={() => setSelectedIssue(issue)}>

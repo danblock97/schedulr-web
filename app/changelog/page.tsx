@@ -12,6 +12,20 @@ export const metadata: Metadata = {
 
 const versions = [
   {
+    version: '1.7.0',
+    displayDate: 'Jan 2, 2026',
+    title: 'Recurring Events and Notification Improvements',
+    summary: 'We\'ve added recurring events support and improved group event creation, along with fixing notification issues.',
+    improvements: [
+      'Added recurring events functionality',
+      'Group events now require people to be added',
+    ],
+    fixes: [
+      'Fixed notifications not working properly',
+      'Fixed notification dates displaying in wrong format',
+    ],
+  },
+  {
     version: '1.6.4',
     displayDate: 'Dec 21, 2025',
     title: 'Feedback and Support Enhancements',
