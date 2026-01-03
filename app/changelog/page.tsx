@@ -12,6 +12,17 @@ export const metadata: Metadata = {
 
 const versions = [
   {
+    version: '1.7.1',
+    displayDate: 'Jan 5, 2026',
+    title: 'Themes / Event Vibes',
+    summary: 'Make events feel fun, not like calendar entries. We\'ve added event themes, custom covers, and themed notification styles to bring personality to your schedule.',
+    improvements: [
+      'Added event themes: 🎬 Movie Night, 🍕 Dinner, 🎉 Party, ✈️ Trip, 🎮 Game Night',
+      'Added custom event covers/images',
+      'Added themed notification styles',
+    ],
+  },
+  {
     version: '1.7.0',
     displayDate: 'Jan 2, 2026',
     title: 'Recurring Events and Notification Improvements',
