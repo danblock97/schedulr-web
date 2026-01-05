@@ -12,6 +12,17 @@ export const metadata: Metadata = {
 
 const versions = [
   {
+    version: '1.7.2',
+    displayDate: 'Jan 5, 2026',
+    title: '"Rain Check" / Event Rescheduling',
+    summary: 'Plans fall through – make it easy to recover.',
+    improvements: [
+      'One-tap "Rain check this event"',
+      'Auto-suggest new dates based on group availability',
+      'Keep the event idea alive without losing context',
+    ],
+  },
+  {
     version: '1.7.1',
     displayDate: 'Jan 5, 2026',
     title: 'Themes / Event Vibes',
