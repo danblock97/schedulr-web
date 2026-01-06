@@ -12,6 +12,26 @@ export const metadata: Metadata = {
 
 const versions = [
   {
+    version: '1.7.3',
+    displayDate: 'Jan 6, 2026',
+    title: 'Availability Sharing Made Casual',
+    summary: 'Making availability sharing feel natural and friendly, plus fixing several UI and calendar sync issues.',
+    improvements: [
+      'Availability sharing without the calendar jargon - make it feel casual, not corporate',
+      'Changed "sync calendars" to "share when you\'re free" for a more friendly tone',
+      'Added visual "heat map" of when the group can hang',
+      'Added "Everyone\'s free Saturday afternoon!" highlight feature',
+      'No need to expose full calendar details to friends',
+    ],
+    fixes: [
+      'Fixed propose time showing on the dashboard for free users (it\'s a pro feature)',
+      'Fixed upgrade to pro screen showing $ instead of £ on per year and per month prices',
+      'Fixed upgrade to pro screen misalignment on AI Req/month - the 0 is now inline with 1 and 5 from the features above',
+      'Fixed issue where approving a rain check request left the old date in all users\' Apple Calendar after rescheduling',
+      'Fixed propose times icon showing in calendar action bar for free users',
+    ],
+  },
+  {
     version: '1.7.2',
     displayDate: 'Jan 5, 2026',
     title: '"Rain Check" / Event Rescheduling',
