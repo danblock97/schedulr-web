@@ -51,9 +51,12 @@ export const metadata: Metadata = {
   },
   themeColor: "#4F46E5",
   manifest: "/manifest.json",
-  alternates: {
-    canonical: "https://schedulr.co.uk",
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/images/schedulr-logo.png',
   },
+  alternates: {
 };
 
 export default function RootLayout({
