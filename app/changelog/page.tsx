@@ -12,6 +12,16 @@ export const metadata: Metadata = {
 
 const versions = [
   {
+    version: '1.7.4',
+    displayDate: 'Jan 7, 2026',
+    title: 'Faster Image Loading',
+    summary: 'Images throughout the app now load faster and more reliably, making everything feel snappier.',
+    improvements: [
+      'Improved image hosting for faster loading times',
+      'Images now load more reliably across all devices',
+    ],
+  },
+  {
     version: '1.7.3',
     displayDate: 'Jan 6, 2026',
     title: 'Availability Sharing Made Casual',
