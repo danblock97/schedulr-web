@@ -57,6 +57,8 @@ export const metadata: Metadata = {
     apple: '/images/schedulr-logo.png',
   },
   alternates: {
+    canonical: "https://schedulr.co.uk",
+  },
 };
 
 export default function RootLayout({
