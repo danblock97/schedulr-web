@@ -4,6 +4,7 @@ import { AnimatedHero } from '@/components/sections/AnimatedHero';
 import { AnimatedFeatures } from '@/components/sections/AnimatedFeatures';
 import { AnimatedHowItWorks } from '@/components/sections/AnimatedHowItWorks';
 import { AppShowcase } from '@/components/sections/AppShowcase';
+import { AppStoreReviews } from '@/components/sections/AppStoreReviews';
 import { AnimatedCTA } from '@/components/sections/AnimatedCTA';
 import { FAQ } from '@/components/sections/FAQ';
 
@@ -52,8 +53,9 @@ export default function Home() {
         <AnimatedFeatures />
         <AnimatedHowItWorks />
         <AppShowcase />
+        <AppStoreReviews />
         <FAQ items={homeFAQ} />
-        
+
         {/* Final CTA */}
         <AnimatedCTA />
       </main>
