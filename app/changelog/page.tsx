@@ -12,6 +12,18 @@ export const metadata: Metadata = {
 
 const versions = [
   {
+    version: '1.7.5',
+    displayDate: 'Jan 14, 2026',
+    title: 'Add Widget Display Options',
+    summary: 'Users can now choose how widgets are displayed, giving more control over widget content rotation and better supporting different usage preferences.',
+    improvements: [
+      'Added in-app setting to choose widget display mode',
+      'Option for rolling events view (existing behavior) - shows upcoming events sequentially, auto-rotating every 10 minutes',
+      'Option for static "Next up" view - shows only the next upcoming event without auto-rotation',
+      'Applies to small and medium size widgets and the lock screen widget',
+    ],
+  },
+  {
     version: '1.7.4',
     displayDate: 'Jan 7, 2026',
     title: 'Faster Image Loading',
