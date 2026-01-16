@@ -12,6 +12,20 @@ export const metadata: Metadata = {
 
 const versions = [
   {
+    version: '1.7.6',
+    displayDate: 'Jan 16, 2026',
+    title: 'UI Polish and AI Improvements',
+    summary: 'Enhanced multi-day event display, improved Scheduly AI responses, streamlined app settings, and fixed profile picture upload issues.',
+    improvements: [
+      'UI enhancements around multi-day events - they now stretch rather than appear as separate events',
+      'Scheduly AI now responds better when asking when you are free - more natural language and gives more than one free time if applicable',
+      'App settings got a revamp to reduce toggles for notifications, bundling them into groups',
+    ],
+    fixes: [
+      'Fixed an issue where adding a new profile picture during onboarding or updating your existing one was showing a 403 status code',
+    ],
+  },
+  {
     version: '1.7.5',
     displayDate: 'Jan 14, 2026',
     title: 'Add Widget Display Options',
